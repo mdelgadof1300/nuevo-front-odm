@@ -1,0 +1,22 @@
+[
+  { "id": "ANM", "value": "Angamacutiro Mich." },
+  { "id": "CAB", "value": "Caborca Sonora" },
+  { "id": "CEN", "value": "Cd. Obregon Sonora" },
+  { "id": "CLO", "value": "Colosio Nayarit" },
+  { "id": "CAC", "value": "Culiacan Sinaloa" },
+  { "id": "GD1", "value": "Guadalajara Modulo 1" },
+  { "id": "GDL", "value": "Guadalajara Modulo 6" },
+  { "id": "GCH", "value": "Guamuchil Sinaloa" },
+  { "id": "GSV", "value": "Guasave Sinaloa" },
+  { "id": "HMO", "value": "Hermosillo C. Autobuses" },
+  { "id": "HET", "value": "Hermosillo Ter Son." },
+  { "id": "LPI", "value": "La Piedad Michoacan" },
+  { "id": "LMM", "value": "Los Mochis Sinaloa" },
+  { "id": "MXL", "value": "Mexicali B.c." },
+  { "id": "UAC", "value": "San Luis Rio Colorado Son." },
+  { "id": "SON", "value": "Sonoyta Sonora" },
+  { "id": "TNY", "value": "Tepic Nayarit" },
+  { "id": "TIJ", "value": "Tijuana B.c." },
+  { "id": "TLI", "value": "Tren Ligero Tlaquepaque" },
+  { "id": "ZPP", "value": "Zapopan Jalisco" }
+]

@@ -1,0 +1,11 @@
+[
+  { "id": "CAC", "value": "Culiacan Sin." },
+  { "id": "GCH", "value": "Guamúchil Sinaloa" },
+  { "id": "GSV", "value": "Guasave Sinaloa" },
+  { "id": "LMM", "value": "Los Mochis Sin" },
+  { "id": "MZT", "value": "Mazatlan Sin." },
+  { "id": "VLL", "value": "Nuevo Vallarta Nay." },
+  { "id": "PVR", "value": "Puerto Vallarta Jal" },
+  { "id": "TNY", "value": "Tepic Central Autobus Nay" },
+  { "id": "CLO", "value": "Tepic Terminal Colosio" }
+]

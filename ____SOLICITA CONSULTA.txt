@@ -1,0 +1,133 @@
+///ACTUALIZA PRECIOS ODM
+
+1.- controlPrecios.php -> lista de corridas mostradas
+2.- cotizaPrecios.html -> precios reales de cada ruta mostrada
+
+
+
+////SOLICITA CONSECUTIV0 07/11/2019
+"https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=CreaSesion&ARGUMENTS=-A1"
+( {"con":  25185406} ) 
+
+///CONSULTA CORRIDAS
+
+'https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=RecuperaCorridasVRARGUMENTS&ARGUMENTS=-A'.$origencode.',-A'.$destinocode.',-A'.$salida.',-A'.$adultos.',-A'.$insen.',-A'.$nino.',-A'.$estudiante.',-A'.$maestro.',-A'.$redondo.',-A0,-A,-A,-ANO,-A,-A,-A,-A,-A,-A1,-A'.$consecutivo.',-A1;
+
+https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=RecuperaCorridasVRARGUMENTS&ARGUMENTS=-AMEX,-AGDL,-A10/11/2019,-A2,-A0,-A1,-A0,-A0,-AV1,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A1,-A15027046,-A1
+
+
+
+SENCILLO
+https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=RecuperaCorridasVRARGUMENTS&ARGUMENTS=-AMEX,-AGDL,-A10/11/2019,-A1,-A0,-A0,-A0,-A0,-AV1,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A1,-A15035237,-A1
+REDONDO
+https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=RecuperaCorridasVRARGUMENTS&ARGUMENTS=-AGDL,-AMEX,-A10/04/2019,-A1,-A0,-A0,-A0,-A0,-AV2,-A0,-A0,-A,-A,-A,-A,-A,-A,-A,-A2,-A";
+
+//// CONSULTA ASIENTOS
+/REDONDO
+"https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=PersonalizarVR&ARGUMENTS=-A"+corridaIda.claveCorrida.replace(/^\s*|\s*$/g,"")+",-A"+corridaIda.FechaSalidaInicio+",-A"+corridaIda.FechaSalidaBoleto+",-A"+corridaIda.HoraSalida+",-A"+corridaRegeso.claveCorrida.replace(/^\s*|\s*$/g,"")+",-A"+corridaRegeso.FechaSalidaInicio+",-A"+corridaRegeso.FechaSalidaBoleto+",-A"+corridaRegeso.HoraSalida+",-A"+corridaIda.EmpresaCorrida+",-A"+corridaRegeso.EmpresaCorrida+",-A,-A,-A,-A,-A,-A"+consecutivo+",-A"+w+"";
+
+
+
+"https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=PersonalizarVR&ARGUMENTS=-A900894,-A10/11/2019,-A10/11/2019,-A02:35,-A900894,-A10/11/2019,-A14/11/2109,-A02:35,-A007,-A007,-A,-A,-A,-A,-A,-A15035237,-A3.3455";
+
+
+
+/SENCILLO
+"/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=PersonalizarVR&ARGUMENTS=-A"+corridaIda.claveCorrida.replace(/^\s*|\s*$/g,"")+",-A"+corridaIda.FechaSalidaInicio+",-A"+corridaIda.FechaSalidaBoleto+",-A"+corridaIda.HoraSalida+",-A,-A,-A,-A,-A"+corridaIda.EmpresaCorrida+",-A,-A,-A,-A,-A,-A,-A"+consecutivo+",-A"+w+"";
+
+"https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=PersonalizarVR&ARGUMENTS=-A952632,-A15/11/2019,-A15/11/2019,-A06:30,-A,-A,-A,-A,-A007,-A,-A,-A,-A,-A,-A,-A 25185623,-A5.6";
+
+
+LISTA DE ASIENTOS DIPONIBLES Y OCUPADOS
+
+https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=navegante3&PRGNAME=MergeAsientosVR&ARGUMENTS=-ATB,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A,-A1,-A15035958
+
+
+
+
+ <input type="hidden" value="'.trim($claveCorrida).'" name="clavecorrida" id="clavecorrida" />
+          <input type="hidden" value="'.$fechaSalidaIni.'" name="fechaSalidaInicio" id="fechaSalidaInicio" />
+          <input type="hidden" value="'.$fechaSalidaB.'" name="fechaSalidaBoleto" id="fechaSalidaBoleto" />
+          <input type="hidden" value="'.$emprecorr.'" name="EmpresaCorrida" id="EmpresaCorrida" />
+
+
+          - - - - - - - - - -
+
+
+( {"Filas": 9,"NoCapturaUltFila":"S","Filas2do": 0, 
+"Asientos": [ { "Asientos":"001", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"002", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"003", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"004", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"005", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"006", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"007", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"008", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"009", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"010", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"011", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"012", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"013", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"014", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"015", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"016", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"017", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"018", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"019", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"020", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"021", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"022", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"023", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"024", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"025", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"026", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"027", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"028", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"029", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"030", "Estados":"0", "Imagenes":"Asiento_VT.jpg", "piso" : " 1" } , 
+{ "Asientos":"031", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"032", "Estados":"1", "Imagenes":"Asiento_LT.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_U.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_U.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } , 
+{ "Asientos":"", "Estados":"0", "Imagenes":"Objeto_.jpg", "piso" : " 1" } ] } )
+
+
+
+({	"CostoTotal" : 1311.00 ,
+ "Adul": "A",
+  "Nin": "N",
+   "Ins": "I",
+    "Est": "E",
+     "Mae": "M",
+      "MoOpe": "513.00,513.00,285.00",
+       "QDescuentoIda" : "NO",
+        "QDescuentoReg" : "NO",
+         "NDescuentosIda" : 2,
+          "NDescuentosReg" : 0 ,
+          	"PasajerosIda":[ 
+          	{ "Leyenda" : "1 Promocion", "Costo": 513.00, "CostoOri": 57.00}, 
+          	{ "Leyenda" : "1 Promocion", "Costo": 513.00, "CostoOri": 57.00}, 
+          	{ "Leyenda" : "1 Menores", "Costo": 285.00, "CostoOri": 0.00} ] })

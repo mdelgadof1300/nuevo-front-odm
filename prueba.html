@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar y Mostrar Datos</title>
+</head>
+
+<body>
+
+    <div id="datos-container"></div>
+
+    <script>
+        // URL de la API
+        const apiUrl = 'https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=RecuperaCorridasVRARGUMENTS&ARGUMENTS=-AMEX,-AMZT,-A30/11/2023,-A1,-A0,-A0,-A0,-A0,-AV2,-A0,-A0,-A,-A,-A,-A,-A,-A,-A,-A2,-A';
+
+        // Elemento en el que mostraremos los datos
+        const datosContainer = document.getElementById('datos-container');
+
+        // Realizar la solicitud HTTP con Fetch
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Verifica la respuesta completa en la consola
+                console.log(data);
+
+                // Eliminar paréntesis y analizar JSON
+                const jsonData = JSON.parse(data.substring(1, data.length - 2));
+
+                // Manipular los datos y mostrarlos en el contenedor
+                mostrarDatos(jsonData);
+            })
+            .catch(error => {
+                console.error('Error al recuperar datos:', error);
+            });
+
+        // Función para mostrar los datos en el contenedor
+        function mostrarDatos(data) {
+            // Puedes personalizar esta función según la estructura de los datos que recibas
+            // Aquí un ejemplo simple de cómo podrías mostrar los datos
+            const tablaHTML = generarTabla(data);
+            datosContainer.innerHTML = tablaHTML;
+        }
+
+        // Función para generar una tabla HTML a partir de los datos
+        function generarTabla(data) {
+            let tablaHTML = '<table border="1">';
+
+            // Encabezado de la tabla
+            tablaHTML += '<thead><tr>';
+            for (const key in data[0]) {
+                tablaHTML += `<th>${key}</th>`;
+            }
+            tablaHTML += '</tr></thead>';
+
+            // Cuerpo de la tabla
+            tablaHTML += '<tbody>';
+            data.forEach(item => {
+                tablaHTML += '<tr>';
+                for (const key in item) {
+                    tablaHTML += `<td>${item[key]}</td>`;
+                }
+                tablaHTML += '</tr>';
+            });
+            tablaHTML += '</tbody>';
+
+            tablaHTML += '</table>';
+
+            return tablaHTML;
+        }
+    </script>
+
+</body>
+
+</html>

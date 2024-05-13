@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadro de venta</title>
+
+    <link rel="stylesheet" type="text/css" href="css3/select2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js3/select2.js"></script>
+    <script async src="js3/calcomplem2.js"></script>
+
+    <style>
+        body {
+            background-color: #003865;
+        }
+
+        .header-movil {
+            width: 100%;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 2px 0;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-right: 20px;
+        }
+
+        .menu li:last-child {
+            margin-right: 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-movil">
+        <h1>Aquí irá el logo</h1>
+    </div>
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Acerca</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <script>
+
+        document.getElementById('mobile-menu').addEventListener('click', function () {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menu = document.querySelector('.menu');
+
+        mobileMenu.addEventListener('click', function () {
+            menu.classList.toggle('active');
+            document.addEventListener('click', function (event) {
+                if (!menu.contains(event.target) && menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const adultTicketsCount = document.getElementById("adultTicketsCount");
+            const childTicketsCount = document.getElementById("childTicketsCount");
+            const inapamTicketsCount = document.getElementById("inapamTicketsCount");
+            const increaseAdultBtn = document.getElementById("increaseAdult");
+            const decreaseAdultBtn = document.getElementById("decreaseAdult");
+            const increaseChildBtn = document.getElementById("increaseChild");
+            const decreaseChildBtn = document.getElementById("decreaseChild");
+            const increaseInapamBtn = document.getElementById("increaseInapam");
+            const decreaseInapamBtn = document.getElementById("decreaseInapam");
+            const studentsTicketsCount = document.getElementById("studentsTicketsCount");
+            const professorsTicketsCount = document.getElementById("professorsTicketsCount");
+            const increaseStudentsBtn = document.getElementById("increaseStudents");
+            const decreaseStudentsBtn = document.getElementById("decreaseStudents");
+            const increaseProfessorsBtn = document.getElementById("increaseProfessors");
+            const decreaseProfessorsBtn = document.getElementById("decreaseProfessors");
+
+            let studentsCount = 0;
+            let professorsCount = 0;
+
+            let adultCount = 0;
+            let childCount = 0;
+            let inapamCount = 0;
+
+            increaseAdultBtn.addEventListener("click", function () {
+                if (adultCount < 10) { // Cambia 10 al valor máximo deseado
+                    adultCount++;
+                    adultTicketsCount.textContent = adultCount;
+                }
+            });
+
+            decreaseAdultBtn.addEventListener("click", function () {
+                if (adultCount > 0) {
+                    adultCount--;
+                    adultTicketsCount.textContent = adultCount;
+                }
+            });
+
+            increaseChildBtn.addEventListener("click", function () {
+                if (childCount < 10) { // Cambia 10 al valor máximo deseado
+                    childCount++;
+                    childTicketsCount.textContent = childCount;
+                }
+            });
+
+            decreaseChildBtn.addEventListener("click", function () {
+                if (childCount > 0) {
+                    childCount--;
+                    childTicketsCount.textContent = childCount;
+                }
+            });
+
+            increaseInapamBtn.addEventListener("click", function () {
+                if (inapamCount < 6) { // Cambia 6 al valor máximo deseado
+                    inapamCount++;
+                    inapamTicketsCount.textContent = inapamCount;
+                }
+            });
+
+            decreaseInapamBtn.addEventListener("click", function () {
+                if (inapamCount > 0) {
+                    inapamCount--;
+                    inapamTicketsCount.textContent = inapamCount;
+                }
+            });
+            increaseStudentsBtn.addEventListener("click", function () {
+                if (studentsCount < 8) {
+                    studentsCount++;
+                    studentsTicketsCount.textContent = studentsCount;
+                }
+            });
+
+            decreaseStudentsBtn.addEventListener("click", function () {
+                if (studentsCount > 0) {
+                    studentsCount--;
+                    studentsTicketsCount.textContent = studentsCount;
+                }
+            });
+
+            increaseProfessorsBtn.addEventListener("click", function () {
+                if (professorsCount < 2) {
+                    professorsCount++;
+                    professorsTicketsCount.textContent = professorsCount;
+                }
+            });
+
+            decreaseProfessorsBtn.addEventListener("click", function () {
+                if (professorsCount > 0) {
+                    professorsCount--;
+                    professorsTicketsCount.textContent = professorsCount;
+                }
+            });
+        });
+        setTimeout(function () {
+            $("#cbx_estado").select2();
+            $("#cbx_municipio").select2();
+
+        }, 2000);
+        $('#cbx_estado').change(function (event) {
+            $("html, body").animate({
+                scrollTop: "120px"
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#cbx_estado").select2({
+                templateResult: formatState
+            });
+
+            $("#cbx_municipio").select2({
+                templateResult: formatState
+            });
+
+            function formatState(state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var icon = $(state.element).data('icon');
+                if (icon) {
+                    return $('<span><i class="' + icon + '"></i> ' + state.text + '</span>');
+                } else {
+                    return state.text;
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var showModalButton = document.getElementById("showModalButton");
+            var ticketModal = document.getElementById("ticketModal");
+
+            showModalButton.addEventListener("click", function () {
+                ticketModal.style.display = "block";
+            });
+
+            ticketModal.addEventListener("click", function (event) {
+                if (event.target === ticketModal) {
+                    ticketModal.style.display = "none";
+                }
+            });
+
+            var closeModalButtons = document.querySelectorAll(".close-modal-button");
+            for (var i = 0; i < closeModalButtons.length; i++) {
+                closeModalButtons[i].addEventListener("click", function () {
+                    ticketModal.style.display = "none";
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <a href="#">
+        <div class="relative flex items-end overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt="Hotel Photo" />
+            <div
+                class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+
+                <button class="text-sm">Add to cart</button>
+            </div>
+        </div>
+
+        <div class="mt-1 p-2">
+            <h2 class="text-slate-700">Adobe Photoshop CC 2022</h2>
+            <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
+
+            <div class="mt-3 flex items-end justify-between">
+                <p class="text-lg font-bold text-blue-500">$850</p>
+
+
+            </div>
+        </div>
+    </a>
+</article>
+<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <a href="#">
+        <div class="relative flex items-end overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt="Hotel Photo" />
+
+        </div>
+
+        <div class="mt-1 p-2">
+            <h2 class="text-slate-700">The Hilton Hotel</h2>
+            <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
+
+            <div class="mt-3 flex items-end justify-between">
+                <p class="text-lg font-bold text-blue-500">$850</p>
+
+
+
+            </div>
+        </div>
+    </a>
+</article>
+<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+    <a href="#">
+        <div class="relative flex items-end overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt="Hotel Photo" />
+        </div>
+
+        <div class="mt-1 p-2">
+            <h2 class="text-slate-700">The Hilton Hotel</h2>
+            <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
+
+            <div class="mt-3 flex items-end justify-between">
+                <p class="text-lg font-bold text-blue-500">$850</p>
+            </div>
+        </div>
+    </a>
+</article>
+
+
+
+
+<div class="flex items-center justify-center bg-gray-100">
+    <div class="carousel-container relative w-10/12">
+        <div class="carousel-slide">
+            <img src="venta_vacacional_2023.webp" alt="Image 0" class="w-full">
+            <img src="Banner_App.webp" alt="Image 1" class="w-full">
+            <img src="Banner_ODM pacifico.webp" alt="Image 2" class="w-full">
+            <img src="Banner_Viaja DD.webp" alt="Image 3" class="w-full">
+        </div>
+        <div class="carousel-arrow carousel-prev" id="prevBtn">&lt;</div>
+        <div class="carousel-arrow carousel-next" id="nextBtn">&gt;</div>
+    </div>
+</div>
+
+<div class="min-h-screen bg-gray-100 p-3 relative">
+    <div class="mx-auto max-w-screen-lg" style="scroll-snap-type: x mandatory; overflow-x: hidden;">
+        <!-- first -->
+        <div class="w-full">
+            <input class="sr-only peer" type="radio" name="carousel" id="carousel-1" checked />
+            <!-- content #1 -->
+            <div
+                class="w-72 md:w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
+                <img class="rounded-t-lg w-full h-40 md:h-64 object-cover" src="gastronomia.jpg" alt="" />
+                <div class="py-4 px-8">
+                    <h1 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-2xl tracking-tight">Lorem
+                        ipsum dolor sit amet consectetur adipisicing.
+                    </h1>
+                    <p class="hover:cursor-pointer py-3 text-gray-600 leading-6">Lorem ipsum dolor, sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+                <!-- controls -->
+                <div class="absolute top-1/2 w-full flex justify-between z-20">
+                    <label for="carousel-3"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 transform translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                    <label for="carousel-2"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 -translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- second -->
+        <div class="">
+            <input class="sr-only peer" type="radio" name="carousel" id="carousel-2" />
+            <!-- content #2 -->
+            <div
+                class="w-72 md:w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
+                <img class="rounded-t-lg w-full h-40 md:h-64 object-cover" src="pueblos.jpg" alt="" />
+                <div class="py-4 px-8">
+                    <h1 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-2xl tracking-tight">
+                        Scelerisque eleifend donec pretium vulputate sapien.
+                    </h1>
+                    <p class="hover:cursor-pointer py-3 text-gray-600 leading-6">Egestas diam in arcu cursus
+                        euismod
+                        quis. Fusce id velit ut tortor. Congue quisque egestas diam in arcu cursus euismod quis.
+                    </p>
+                </div>
+                <!-- controls -->
+                <div class="absolute top-1/2 w-full flex justify-between z-20">
+                    <label for="carousel-1"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 transform translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                    <label for="carousel-3"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 -translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- three -->
+        <div class="">
+            <input class="sr-only peer" type="radio" name="carousel" id="carousel-3" />
+            <!-- content #3 -->
+            <div
+                class="w-72 md:w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0">
+                <img class="rounded-t-lg w-full h-40 md:h-64 object-cover" src="turismo.jpg" alt="" />
+                <div class="py-4 px-8">
+                    <h1 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-2xl tracking-tight">
+                        Consectetur purus ut faucibus pulvinar elementum.
+                    </h1>
+                    <p class="hover:cursor-pointer py-3 text-gray-600 leading-6">Aliquam ultrices sagittis orci
+                        a
+                        scelerisque purus semper. Quisque id diam vel quam elementum pulvinar. Facilisis magna
+                        etiam
+                        tempor orci eu lobortis elementum.
+                    </p>
+                </div>
+                <!-- controls -->
+                <div class="absolute top-1/2 w-full flex justify-between z-20">
+                    <label for="carousel-2"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 transform translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                    <label for="carousel-1"
+                        class="inline-block text-red-600 cursor-pointer  bg-white rounded-full shadow-md active:translate-y-0.5 -translate-x-[10px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="flex items-center mb-4 justify-center py-2">
+    <span class="pl-5">INAPAM<br>Presentar <br> documentación oficial</span>
+    <div class="pl-40">
+        <button type="button" class="px-2 py-1 text-xs bg-[#DCDCDC] text-white rounded-full"
+            data-type="decrement-inapam">-</button>
+        <span class="mx-2 text-sm font-semibold" id="inapamCount">0</span>
+        <button type="button" class="px-2 py-1 text-xs bg-[#0D8BFF] text-white rounded-full"
+            data-type="increment-inapam">+</button>
+    </div>
+
+</div>
+<div class="flex mb-4  py-2">
+    <span class="pl-5">Profesor <br>Presentar <br> credencial vigente</span>
+    <div class="pl-40">
+        <button type="button" class="px-2 py-1 text-xs bg-[#DCDCDC] text-white rounded-full"
+            data-type="decrement-professor">-</button>
+        <span class="mx-2 text-sm font-semibold" id="professorCount">0</span>
+        <button type="button" class="px-2 py-1 text-xs bg-[#0D8BFF] text-white rounded-full"
+            data-type="increment-professor">+</button>
+    </div>
+</div>
+<div class="flex  mb-4 py-2">
+    <span class="pl-5">Estudiante <br>Presentar credencial vigente</span>
+    <div class="pl-40">
+        <button type="button" class="px-2 py-1 text-xs bg-[#DCDCDC] text-white rounded-full"
+            data-type="decrement-student">-</button>
+        <span class="mx-2 text-sm font-semibold" id="studentCount">0</span>
+        <button type="button" class="px-2 py-1 text-xs bg-[#0D8BFF] text-white rounded-full"
+            data-type="increment-student">+</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+///////// ORIGENES /////////
+<select style="width: 100%; height: 39px; border: 1px solid white; border-radius: 4px; background-color: #fff;"
+    name="origencode" id="cbx_estado">
+    <option selected="selected" disabled="">¿De Dónde Sales?</option>
+    <option value="ACR">Acambaro Gto</option>
+    <option value="ACT">Actopan Hgo</option>
+    <option value="AEA">Aeropuerto Mty. A N.l</option>
+    <option value="NLU">Aeropuerto Felipe Angeles</option>
+    <option value="CNJ">Agencia Conejo</option>
+    <option value="APS">Agua Prieta Son</option>
+    <option value="AGU2">Aguascalientes Agr. Norte</option>
+    <option value="AGU">Aguascalientes C. Autobus</option>
+    <option value="AHU">Ahuacatlán Nay</option>
+    <option value="AHT">Ahuetita</option>
+    <option value="ALL">Allende Chih</option>
+    <option value="CAO">Alvaro Obregon Chih</option>
+    <option value="SAR">Altamira Tamaulipas</option>
+    <option value="ANG">Angostura Chih</option>
+    <option value="ASC">Ascención Chih</option>
+    <option value="ATA">Atlacomulco Mex</option>
+    <option value="ANA">Santa Ana Sonora</option>
+    <option value="BAC">Bachiniva Chih</option>
+    <option value="BJU">Benito Juarez Chih</option>
+    <option value="SCD">Cadereyta Jimenez N.l.</option>
+    <option value="CAC">Culiacán, Sin.</option>
+    <option value="CAB">Caborca Sonora</option>
+    <option value="CCA">Camargo Chih</option>
+    <option value="CGT">Camargo Tamps.</option>
+    <option value="C101">Campo 101 Chih</option>
+    <option value="CSM">Campo Seis Y Medio Chih</option>
+    <option value="CNE">Cananea Son</option>
+    <option value="CIJ">Cañada De Islas Jal</option>
+    <option value="CAS">Casas Grandes Chih</option>
+    <option value="CYA">Celaya Gto</option>
+    <option value="CHA">Chapulhuacán Hgo</option>
+    <option value="CUU">Chihuahua Central Autobus</option>
+    <option value="PIM">Chihuahua Pistolasmeneses</option>
+    <option value="ZOO">Chihuahua Zootecnia</option>
+    <option value="CHIN">China N.l.</option>
+    <option value="ATG">Ciudad Altamirano Gro</option>
+    <option value="CTO">Ciudad Cuauhtemoc Chih</option>
+    <option value="DEL">Ciudad Delicias Chih</option>
+    <option value="CGZ">Ciudad Guzman Jal</option>
+    <option value="HID">Ciudad Hidalgo Mich</option>
+    <option value="JIM">Ciudad Jimenez Chih</option>
+    <option value="CJS">Ciudad Juarez Chih</option>
+    <option value="CDM">Ciudad Mante Tamps</option>
+    <option value="MIE">Ciudad Mier Tamps.</option>
+    <option value="CEN">Ciudad Obregon, Son.</option>
+    <option value="CEM">Ciudad Valles Slp</option>
+    <option value="CVM">Ciudad Victoria Tamps</option>
+    <option value="CIN">Col. Independencia Chih</option>
+    <option value="COL">Colima Col</option>
+    <option value="QVO">Colonia Quevedo Chih</option>
+    <option value="CLT">Colotlán Jal</option>
+    <option value="COO">Concepción Del Oro Zac</option>
+    <option value="CBC">Corral Blanco</option>
+    <option value="BEJ">Crucero Belén Jal</option>
+    <option value="CPA">Crucero Palomas Chih</option>
+    <option value="CTP">Crucero Tepatitlán Jal</option>
+    <option value="CUE">Cuencamé Dgo</option>
+    <option value="CUI">Cuitaca Son</option>
+    <option value="CUT">Cutzamala Gro</option>
+    <option value="DHI">Dolores Hidalgo Gto</option>
+    <option value="DGO">Durango Central Autobus</option>
+    <option value="EBA">Ebano Slp</option>
+    <option value="BAT">El Batán Jal</option>
+    <option value="ROD">El Rodeo Dgo</option>
+    <option value="EML">Empalme, Sonora</option>
+    <option value="ENC">Encarnación De Díaz Jal</option>
+    <option value="FIM">Fco. I. Madero Dgo</option>
+    <option value="FRE">Fresnillo Zac</option>
+    <option value="GAL">Galeana Chih</option>
+    <option value="VGC">Gema Cuitzeo Mich</option>
+    <option value="GBRA">General Bravo N.l.</option>
+    <option value="GFA">Gomez Farias Chih</option>
+    <option value="GOP">Gomez Palacio C. Autobus</option>
+    <option value="HAM">Terminal Hamburgo Gomez Palacio</option>
+    <option value="SLU">Granjas Sta. Lucia Dgo</option>
+    <option value="GDL">Guadalajara Jal. Modulo 6</option>
+    <option value="GD1">Guadalajara Modulo 1 1/2</option>
+    <option value="GCH">Guamuchil Sinaloa</option>
+    <option value="GYM">Guaymas, Sonora</option>
+    <option value="GSV">Guasave Sinaloa</option>
+    <option value="AEG">Aeropuerto Gdl Jal</option>
+    <option value="GVI">Guadalupe Victoria Dgo</option>
+    <option value="GTO">Guanajuato Gto</option>
+    <option value="HA2">Hamburgo Plaza Palmas Gomez Palacio</option>
+    <option value="HMO">Hermosillo C. Autobuses</option>
+    <option value="HET">Hermosillo Terminal</option>
+    <option value="AHG">Hidalgo Reynosa</option>
+    <option value="AHG">Hidalgo Reynosa Tamps</option>
+    <option value="HUA">Huauchinango Pue</option>
+    <option value="HUE">Huejucar Jal</option>
+    <option value="ZAR">Ignacio Zaragoza Chih</option>
+    <option value="IPO">Irapuato Gto</option>
+    <option value="IXP">Ixtapa Zihuatanejo Gro</option>
+    <option value="IXT">Ixtlan Del Rio Nay</option>
+    <option value="JGY">Jagueyes Chih</option>
+    <option value="JAP">Jalpa Zac</option>
+    <option value="JAN">Janos Chih</option>
+    <option value="JAR">Jaralillo Jal</option>
+    <option value="JER">Jerez Zac</option>
+    <option value="JSA">Jesus Aguirre</option>
+    <option value="JU2">Juan Aldama 2 Zac</option>
+    <option value="JUA">Juan Aldama Zac</option>
+    <option value="JUC">Juchipila. Zac.</option>
+    <option value="LBB">La Barca Jal</option>
+    <option value="LCM">La Copa Matamoros Tamps</option>
+    <option value="LJA">La Joya Coah</option>
+    <option value="MIN">La Mina Chih</option>
+    <option value="LPI">La Piedad Mich</option>
+    <option value="LPN">La Pinta Chih</option>
+    <option value="LQE">La Quemada Chih</option>
+    <option value="LZA">La Zarca Dgo</option>
+    <option value="LGS">Lagos De Moreno Jal</option>
+    <option value="LAG">Lagunitas Chih</option>
+    <option value="LNI">Las Nieve Dgo</option>
+    <option value="LVA">Las Varas Chih</option>
+    <option value="LAC">Lazaro Cardenas Chih</option>
+    <option value="LZC">Lazaro Cardenas Mich</option>
+    <option value="LEB">Lebaron Chih</option>
+    <option value="BJX">Leon Gto</option>
+    <option value="LOR">Loreto Zac</option>
+    <option value="LRY">Los Reyes Mich</option>
+    <option value="LMM">Los Mochis, Sin.</option>
+    <option value="LNA">Linares Nl.</option>
+    <option value="LMO">Luis Moya. Zac.</option>
+    <option value="ZLO">Manzanillo Col</option>
+    <option value="MVT">Maravatio Mich</option>
+    <option value="PLF">Mat. Plaza Fiesta Tamps</option>
+    <option value="MAC">Matamoros Coahuila Coah</option>
+    <option value="MAM">Matamoros. Tamps.</option>
+    <option value="MHN">Matehuala Noreste</option>
+    <option value="MA57">Matehuala Terminal 57</option>
+    <option value="MLP">Matlapa Slp</option>
+    <option value="MZT">Mazatlan Sin.</option>
+    <option value="MDM">Mercado Del Mar Zapopan Centro</option>
+    <option value="MTP">Metro Plaza</option>
+    <option value="MXL">Mexicali B.C.</option>
+    <option value="SPC">Mexicali Plaza Cibeles</option>
+    <option value="MEX">Mexico Central Norte</option>
+    <option value="OBS">Mexico Observatorio</option>
+    <option value="MEZ">Mezcales, Nay</option>
+    <option value="MAL">Miguel Aleman. Tamps.</option>
+    <option value="MTY">Monterrey Central Autobus</option>
+    <option value="MTF">Monterrey Terminal Fierro</option>
+    <option value="SUD">Monterrey Universidad</option>
+    <option value="MLM">Morelia Mich</option>
+    <option value="MRL">Moroleon Gto</option>
+    <option value="LOV">Monclova Coah.</option>
+    <option value="MNR">Montemorelos Nl.</option>
+    <option value="MOY">Moyahua Zac</option>
+    <option value="NOC">Nochistlán Zac</option>
+    <option value="NOG">Nogales Son</option>
+    <option value="NDI">Nombre De Dios Dgo</option>
+    <option value="NLD">Nuevo Laredo Tamps.</option>
+    <option value="NAV">Navojoa Sonora</option>
+    <option value="NAJ">Navojoa Centro</option>
+    <option value="OCO">Ocotlan Jal</option>
+    <option value="OJI">Ojinaga Chih</option>
+    <option value="OCN">Ojo Caliente Nte-sur Zac</option>
+    <option value="PCA">Pachuca Hgo</option>
+    <option value="PAR">Parral. Chih.</option>
+    <option value="PJM">Penjamo Gto.</option>
+    <option value="PVR">Puerto Vallarta Jal.</option>
+    <option value="SAC">Plaza Agricultores</option>
+    <option value="PAG">Suc. Paseos Agu.</option>
+    <option value="PTC">Patzcuaro Mich</option>
+    <option value="PEB">Peña Blanca Chih</option>
+    <option value="PBC">Peñon Blanco Dgo</option>
+    <option value="SPM">Periférico Matamoro tamps</option>
+    <option value="PAZ">Poza Rica Ver</option>
+    <option value="PUR">Puruandiro, Michoacan</option>
+    <option value="VLL">Nuevo Vallarta, Nay.</option>
+    <option value="PPA">Puerto Palomas Chih.</option>
+    <option value="QET">Queretaro Qro</option>
+    <option value="RCO">Rancho Colorado Chih</option>
+    <option value="REX">Reynosa. Tams.</option>
+    <option value="RFM">Ricardo Flores Magon. Chi</option>
+    <option value="RIB">Rio Bravo Tamps.</option>
+    <option value="RGR">Rio Grande Zac</option>
+    <option value="SAI">Sain Alto Zac</option>
+    <option value="SMX">Salamanca Gto</option>
+    <option value="SLN">Salinas Slp</option>
+    <option value="SWN">Saltillo Norte</option>
+    <option value="SLW">Saltillo Central Autobus</option>
+    <option value="SIO">Saltillo Suc. El Indio</option>
+    <option value="SAV">Salvatierra Gto</option>
+    <option value="SBV">San Buenaventura. Chih.</option>
+    <option value="SFG">San Felipe Gto Gto</option>
+    <option value="SJL">San Juan De Los Lagos jal</option>
+    <option value="SJQ">San Juan Del Rio, Qro.</option>
+    <option value="LZO">San Lorenzo Chih</option>
+    <option value="UAC">San Luis Rio Colorado Son.</option>
+    <option value="SPA">San Luis De La Paz Gto</option>
+    <option value="SLP">San Luis Potosi. Slp.</option>
+    <option value="SMA">San Miguel Allende Gto</option>
+    <option value="APU">San Pedro Apulco Zac</option>
+    <option value="STD">Santa Maria Del Oro Dgo</option>
+    <option value="SAU">Saucillo Chih</option>
+    <option value="SIL">Silao Gto</option>
+    <option value="SOM">Sombrerete Zac</option>
+    <option value="SON">Sonoyta Sonora</option>
+    <option value="SOT">Soto Mainez Chih</option>
+    <option value="CFN">Suc Contraflujo Norte</option>
+    <option value="CZO">Suc. El Carrizo Hgo. Dgo</option>
+    <option value="MXS">Suc. Mexticacan Jal</option>
+    <option value="STZ">Suc. Tecnológico Zac</option>
+    <option value="SMOR">Sucursal Morelos</option>
+    <option value="PA2">Sucursal Parral Chih</option>
+    <option value="SCA">Sucursal Santa Catarina</option>
+    <option value="SLX">Super Lexo</option>
+    <option value="TAB">Tabasco. Zac.</option>
+    <option value="TMZ">Tamazunchale Slp</option>
+    <option value="TAH">Tamiahua Ver</option>
+    <option value="TAM">Tampico Central Autobus</option>
+    <option value="TMN">Tampico Norte Tamps</option>
+    <option value="TLE">Tampico Terminal Ejercito</option>
+    <option value="TAN">Tamuin Slp</option>
+    <option value="TEC">Tecoman Col</option>
+    <option value="TEJ">Tejupilco Mex</option>
+    <option value="TEO2">Teocaltiche 2 Jal</option>
+    <option value="TEO">Teocaltiche Jal</option>
+    <option value="TPT">Tepatitlan Jal</option>
+    <option value="TNY">Tepic Central Autobus Nay</option>
+    <option value="CLO">Tepic Terminal Colosio</option>
+    <option value="TPZ">Tepotzotlán Mex</option>
+    <option value="TEU">Teul De Glez Ortega Zac</option>
+    <option value="TLA">Tlaltenango Zac</option>
+    <option value="TIJ">Tijuana B.C.</option>
+    <option value="TLC">Toluca Mex</option>
+    <option value="TRC">Torreón Coah</option>
+    <option value="TLI">Tren Ligero Jal</option>
+    <option value="TCA">Tres Castillos. Chih.</option>
+    <option value="THG">Tula Hgo</option>
+    <option value="TUJ">Tuxpan Jalisco Jal</option>
+    <option value="TXM">Tuxpan Michoacán Mich</option>
+    <option value="TCT">Tuxpan Term. Centro Ver</option>
+    <option value="TXP">Tuxpan Veracruz</option>
+    <option value="URI">Uriangato</option>
+    <option value="UPN">Uruapan Mich</option>
+    <option value="VHT">Valle Hermoso Tamps</option>
+    <option value="VENC">Venecia Tamps.</option>
+    <option value="VGE">Vicente Guerrero Dgo</option>
+    <option value="VAH">Villa Ahumada Chih</option>
+    <option value="VOC">Villa Ocampo. Dgo</option>
+    <option value="VIL">Villanueva Zac</option>
+    <option value="VREA">Villarreales</option>
+    <option value="VIG">Villas De Guadiana Dgo</option>
+    <option value="YAH">Yahualica Jal</option>
+    <option value="YUR">Yuriria Gto</option>
+    <option value="ZCL">Zacatecas Central Autobus</option>
+    <option value="GZA">Zacatecas Trmnl Guadalupe</option>
+    <option value="ZAM">Zamora Mich</option>
+    <option value="ZPP">Zapopan Jal</option>
+    <option value="ZIH">Zihuatanejo Gro</option>
+    <option value="ZTC">Zitacuaro Mich</option>
+</select>

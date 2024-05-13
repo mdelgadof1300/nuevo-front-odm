@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="pagmaestra-favicon.ico">
+    <title> ODM | Selecciona tus asientos </title>
+    <meta name="description" content="Compra tus boletos por internet y obtén un 10% de descuento" />
+    <meta name="keywords" content="Compra tus boletos por internet y obtén un 10% de descuento">
+    <script src="3.3.3.js"></script>
+    <link rel="shortcut icon" href="pagmaestra-favicon.ico">
+
+
+    <script defer src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-white p-4 md:p-2">
+        <img src="logoODMplus.svg" alt="logoODM" class="w-full sm:w-2/3 lg:w-1/3 h-auto mx-auto">
+    </div>
+    <div class="bg-[#C82333] flex flex-col items-center justify-center h-24">
+        <p class="text-center text-white text-xl lg:text-2xl font-bold mt-3">Selecciona tus asientos</p>
+
+        <div class="w-full max-w-screen-2xl mx-auto mt-3 mb-3 flex items-center justify-center">
+            <div class="flex items-center space-x-4 md:space-x-10 lg:space-x-20">
+                <img src="celularB.svg" alt="celular" class="w-5 lg:w-6">
+                <div
+                    class="w-6 h-6 bg-white border border-white rounded-full flex items-center justify-center relative">
+                    <div class="bg-white border border-white w-6 h-6 rounded-full"></div>
+                </div>
+                <hr class="border-white border-2 flex-grow">
+                <div
+                    class="w-6 h-6 bg-transparent border border-white rounded-full flex items-center justify-center relative">
+                    <div class="bg-[#00FF29] border border-white w-6 h-6 rounded-full"></div>
+                </div>
+                <hr class="border-white border-2 flex-grow">
+                <div
+                    class="w-6 h-6 bg-transparent border border-white rounded-full flex items-center justify-center relative">
+                    <div class="bg-transparent border border-white w-6 h-6 rounded-full"></div>
+                </div>
+                <img src=" Bus_1b-01.svg" alt="Bus blanco" class="w-8 lg:w-10">
+                <div id="contador" class="text-[#C82333] text-2xl lg:text-4xl bg-white p-0 rounded">
+                    5:00
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bg-[#1D93D2]  h-screen">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 gap-2 mx-8 2xl:gap-8 sm:mx-20 md:mx-24 lg:mx-28 mb-8 pt-5 2xl:mx-40">
+            <div class="bg-[#003368] p-4 pt-5 mx-0 text-white text-center font-bold rounded-lg h-auto text-lg">
+                <img src="logo_1_piso.svg" alt="Logo un piso" class="mx-auto">
+                <hr class="w-full bg-white pt-0 pb-0">
+                <p class="uppercase">Origen: México Central Norte</p>
+                <p class="uppercase">Destino: Colima, Col.</p>
+            </div>
+            <input type="hidden" id="tipoBoleto" name="tipoBoleto" value="" />
+
+            <div class="lg:col-span-1">
+                <div class="flex w-full flex-2 mb-5 lg:mb-0 lg:col-span-1 lg:w-full lg:-mt-20" id="datepickerRange">
+                    <div x-data="app" x-cloak class="w-full">
+                        <div class="container mx-auto py-0 md:py-0">
+                            <div class="flex items-center sm:ml-0 lg:ml-0">
+                                <div class="flex space-x-8 lg:space-x-4 w-full" @keydown.escape="closeDatepicker()"
+                                    @click.outside="closeDatepicker()">
+                                    <div
+                                        class="input-container flex justify-between flex-nowrap mx-0  lg:mx-0 w-full lg:mr-2">
+                                        <div class="input-container flex items-center mr-2">
+                                            <div
+                                                class="input-with-svg mr-0 sm:ml-0 mr-0 sm:mr-0 lg:col-span-1 px-0 w-full">
+                                                <div class="relative">
+                                                    <p class="text-center text-white">SALIDA</p>
+                                                    <input type="text" placeholder="FECHA DE REGRESO"
+                                                        @click="endToShow = 'to'; init(); showDatepicker = true"
+                                                        :value="boletoAbierto ? 'FECHA ABIERTA' : formatDate(dateTo)"
+                                                        :class="{'font-semibold': endToShow == 'to' }"
+                                                        id="regresoAbierto" @click="selectDateFrom" autocomplete="off"
+                                                        class="border border-white pl-0 w-full  2xl:w-[117%] rounded-md border border-white h-12 text-sm bg-[#C82333] text-white font-semibold text-center" />
+                                                    <!-- <img src="calendario.svg" alt="" class="absolute w-8 h-8 right-3 top-8">-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-container flex items-center">
+                                            <div
+                                                class="input-with-svg mx-0 sm:ml-0 mr-0 sm:mr-0 lg:col-span-1 px-0 w-full lg:mr-2">
+                                                <div class="relative">
+                                                    <p class="text-center text-white">REGRESO</p>
+                                                    <input type="text" placeholder="FECHA DE REGRESO"
+                                                        @click="endToShow = 'to'; init(); showDatepicker = true"
+                                                        :value="boletoAbierto ? 'FECHA ABIERTA' : formatDate(dateTo)"
+                                                        :class="{'font-semibold': endToShow == 'to' }"
+                                                        id="fechaEspecifica" @click="selectDateFrom" autocomplete="off"
+                                                        class="border border-white pl-0 w-full 2xl:w-[117%] rounded-md border border-white h-12 text-sm bg-transparent text-white font-semibold text-center" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <style>
+                                        #fecha-ida::placeholder,
+                                        #regresoAbierto::placeholder,
+                                        #fechaEspecifica::placeholder {
+                                            color: white;
+                                        }
+                                    </style>
+
+                                    <div class="absolute bg-white mt-2 rounded-lg shadow p-4 sm:w-80 w-10/12 z-50"
+                                        x-show="showDatepicker" x-transition>
+                                        <div class="flex flex-col items-center">
+
+                                            <div class="w-full flex justify-between items-center mb-2">
+                                                <div>
+                                                    <span x-text="MONTH_NAMES[month]"
+                                                        class="text-lg font-bold text-gray-800"></span>
+                                                    <span x-text="year"
+                                                        class="ml-1 text-lg text-gray-600 font-normal"></span>
+                                                </div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                        @click="if (month == 0) {year--; month=11;} else {month--;} getNoOfDays()">
+                                                        <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 19l-7-7 7-7" />
+                                                        </svg>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                        @click="if (month == 11) {year++; month=0;} else {month++;}; getNoOfDays()">
+                                                        <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M9 5l7 7-7 7" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="w-full flex flex-wrap mb-3 -mx-1">
+                                                <template x-for="(day, index) in DAYS" :key="index">
+                                                    <div style="width: 14.26%" class="px-1">
+                                                        <div x-text="day"
+                                                            class="text-gray-800 font-medium text-center text-xs">
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+                                            <div class="flex flex-wrap -mx-1">
+                                                <template x-for="blankday in blankdays">
+                                                    <div style="width: 14.28%"
+                                                        class="text-center border p-1 border-transparent text-sm">
+                                                    </div>
+                                                </template>
+                                                <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                                                    <div style="width: 14.28%">
+                                                        <div @click="getDateValue(date, false)"
+                                                            @mouseenter="getDateValue(date, true)" x-text="date"
+                                                            class="p-1 cursor-pointer text-center text-sm leading-none leading-loose transition ease-in-out duration-100"
+                                                            :class="{'font-bold': isToday(date) == true, 'bg-blue-800 text-white rounded-l-full': isDateFrom(date) == true, 'bg-blue-800 text-white rounded-r-full': isDateTo(date) == true, 'bg-blue-200': isInRange(date) == true }">
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-1">
+                <div class="flex w-full flex-2  lg:col-span-1 hidden" id="datepickerSingle" style="display:none;">
+                    <div x-data="app" x-cloak class="w-full">
+                        <div class="container py-0 md:py-0">
+                            <div class="flex items-center mx-0 sm:ml-0 w-full">
+                                <div class="flex space-x-8 lg:space-x-4 w-full" @keydown.escape="closeDatepicker()"
+                                    @click.outside="closeDatepicker()">
+                                    <div class="input-with-svg mx-6 sm:mx-10 lg:col-span-1 px-2 sm:px-0 w-full">
+                                        <div class="relative flex items-center">
+                                            <input type="text"
+                                                @click="endToShow = 'from'; init(); showDatepicker = true"
+                                                :value="formatDate(dateFrom)"
+                                                :class="{'font-semibold': endToShow == 'from' }" @click="selectDateFrom"
+                                                class="focus:outline-none border-none w-full text-center rounded-md border-r border-gray-300 h-12 sm:w-full lg:w-[310px] 2xl:w-[105%] md:w-full"
+                                                placeholder="FECHA DE IDA" />
+                                            <img src="calendario.svg" alt="" class="absolute w-8 h-8 ml-8">
+                                        </div>
+                                    </div>
+
+                                    <div class="absolute bg-white mt-2 rounded-lg shadow p-4 sm:w-80 w-10/12 z-50"
+                                        x-show="showDatepicker" x-transition>
+                                        <div class="flex flex-col items-center">
+
+                                            <div class="w-full flex justify-between items-center mb-2">
+                                                <div>
+                                                    <span x-text="MONTH_NAMES[month]"
+                                                        class="text-lg font-bold text-gray-800"></span>
+                                                    <span x-text="year"
+                                                        class="ml-1 text-lg text-gray-600 font-normal"></span>
+                                                </div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                        @click="if (month == 0) {year--; month=11;} else {month--;} getNoOfDays()">
+                                                        <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 19l-7-7 7-7" />
+                                                        </svg>
+                                                    </button>
+                                                    <button type="button"
+                                                        class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                        @click="if (month == 11) {year++; month=0;} else {month++;}; getNoOfDays()">
+                                                        <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M9 5l7 7-7 7" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="w-full flex flex-wrap mb-3 -mx-1">
+                                                <template x-for="(day, index) in DAYS" :key="index">
+                                                    <div style="width: 14.26%" class="px-1">
+                                                        <div x-text="day"
+                                                            class="text-gray-800 font-medium text-center text-xs">
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+                                            <div class="flex flex-wrap -mx-1">
+                                                <template x-for="blankday in blankdays">
+                                                    <div style="width: 14.28%"
+                                                        class="text-center border p-1 border-transparent text-sm">
+                                                    </div>
+                                                </template>
+                                                <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                                                    <div style="width: 14.28%">
+                                                        <div @click="getDateValue(date, false); showTicketSelector = true"
+                                                            @mouseenter="getDateValue(date, true)" x-text="date"
+                                                            class="p-1 cursor-pointer text-center text-sm leading-none leading-loose transition ease-in-out duration-100"
+                                                            :class="{'font-bold': isToday(date) == true, 'bg-blue-800 text-white rounded-l-full': isDateFrom(date) == true, 'bg-blue-800 text-white rounded-r-full': isDateFrom(date) == true, 'bg-blue-200': isInRange(date) == true }">
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+
+                                            <div>
+                                                <button @click.prevent="showDatepicker = false"
+                                                    class="px-2 py-1 border border-gray-300 hover:border-gray-500 bg-[#C82333] text-white font-bold rounded-md">Cancelar</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-300 text-center mx-auto w-full lg:w-full p-2">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th class="font-semibold">Nombre</th>
+                            <th class="font-semibold">Asiento</th>
+                            <th class="font-semibold">Categoría</th>
+                            <th class="font-semibold">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Ejemplo de una fila -->
+                        <tr>
+                            <td class="text-[#003368]"><input type="text" name="" id="" class="w-full"
+                                    placeholder="Nombre"></td>
+                            <td class="text-[#003368]">-</td>
+                            <td class="text-[#003368] font-semibold uppercase">Adulto</td>
+                            <td class="text-[#003368]">$513</td>
+                        </tr>
+                        <!-- Fila 2-->
+                        <tr>
+                            <td class="text-[#003368]"><input type="text" name="" id="" class="w-full"
+                                    placeholder="Nombre"></td>
+                            <td class="text-[#003368]">-</td>
+                            <td class="text-[#003368] font-semibold uppercase">Niño</td>
+                            <td class="text-[#003368]">$286</td>
+                        </tr>
+                        <!-- Fila 3-->
+                        <tr>
+                            <td class="text-[#003368]"><input type="text" name="" id="" class="w-full"
+                                    placeholder="Nombre"></td>
+                            <td class="text-[#003368]">-</td>
+                            <td class="text-[#003368] font-semibold uppercase">INAPAM</td>
+                            <td class="text-[#003368]">$286</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="bg-[#003368] mx-auto p-2 text-white w-full">
+                <p class="text-lg font-semibold text-center">Total: $1085</p>
+            </div>
+
+
+        </div>
+        <div class="flex justify-between mx-8 py-5 bg-[#1D93D2] lg:col-start-2">
+            <button id="regresarBtn"
+                class="bg-[#C82333] text-white px-6 py-2 lg:px-8 lg:py-4 rounded border-white border-2 font-semibold lg:font-bold lg:text-xl button">Regresar</button>
+            <button id="continuarBtn"
+                class="bg-[#C82333] text-white px-6 py-2 lg:px-8 lg:py-4 rounded border-white border-2 font-semibold lg:font-bold lg:text-xl cursor-not-allowed opacity-50 button"
+                disabled>Continuar</button>
+        </div>
+        <div id="myModal"
+            class="fixed bottom-0 left-0 right-0 bg-black bg-opacity-50 h-screen flex justify-center items-center z-50 rounded-lg hidden">
+            <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-3/4 space-y-8">
+                <span id="closeModal" class="close cursor-pointer absolute top-0 right-0 p-4">&times;</span>
+                <p class="text-center text-lg text-[#003368] font-bold">AVISO IMPORTANTE.</p>
+                <p class="text-center text-[#003368] text-base font-semibold">Cuentas con 180 días para canjear tu
+                    boleto abierto (regreso) en la opción <label for="intercambio" class="text-[#003368] font-bold">
+                        intercambio</label> de odm.com.mx.</p>
+                <div class="text-center">
+                    <button id="redirectToPage"
+                        class="bg-[#C82333] text-white px-4 py-2 rounded text-center mx-auto w-3/4">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <section class="bg-[#003368]">
+        <div class="max-w-screen-xl px-4 py-10 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="flex flex-wrap justify-center -mx-5 -my-2">
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/quienes-somos2"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        ¿Quiénes somos?
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/preguntas-frecuentes"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Preguntas frecuentes
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="http://venta.odm.com.mx/netScripts/request.aspx?APPNAME=Navegante&PRGNAME=AccesoEx&ARGUMENTS=-AAG&_gl=1*z7x1y0*_ga*NjAyODM2MzE2LjE2NzI0MjgyOTU.*_ga_6MKKJY80T1*MTY3OTY3MDk4NC4xMDQuMS4xNjc5NjcyNjE0LjQ5LjAuMA.."
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Agencias
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/contactanos"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Contáctanos
+                    </a>
+                </div>
+            </nav>
+            <img src="logoblanco.webp" alt="Logo" class="w-60 h-20 mx-auto" />
+            <div class="flex justify-center mt-5 space-x-6">
+                <a href="https://www.facebook.com/OmnibusdeMexicoOficial/?fref=ts"
+                    class="text-white hover:text-neutral-600">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/omnibus_oficial" class="text-white hover:text-gray-600">
+                    <span class="sr-only">Twitter</span>
+                    <img src="twitterxlogo.webp" class="w-6 h-6" alt="">
+                </a>
+                <a href="https://www.instagram.com/omnibus_oficial/" class="text-white hover:text-gray-600">
+                    <span class="sr-only">Instagram</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCyQ_-uZqptGN2M45DNOl7CQ"
+                    class="text-white hover:text-gray-600">
+                    <span class="sr-only">YouTube</span>
+                    <svg aria-hidden="true" fill="currentColor" class="bi bi-youtube w-6 h-6" viewBox="0 0 16 16">
+                        <path
+                            d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <p class="mt-8 text-base leading-6 text-center text-white hover:text-neutral-600">
+                <a href="https://odm.com.mx/aviso-privacidad">Aviso de privacidad | Políticas de viaje</a>
+            </p>
+            <p class="mt-8 text-base leading-6 text-center text-white">
+                © 2023 Ómnibus de México. Todos los derechos reservados.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Función para iniciar el contador
+        function iniciarContador() {
+            var tiempoRestante = 300; // 5 minutos en segundos
+
+            // Actualizar el contador cada segundo
+            var intervalo = setInterval(function () {
+                var minutos = Math.floor(tiempoRestante / 60);
+                var segundos = tiempoRestante % 60;
+
+                // Formatear el tiempo en mm:ss
+                var tiempoFormateado = minutos.toString().padStart(2, '0') + ':' + segundos.toString().padStart(2, '0');
+
+                // Actualizar el contenido del contador
+                document.getElementById('contador').textContent = tiempoFormateado;
+
+                // Disminuir el tiempo restante
+                tiempoRestante--;
+
+                // Detener el contador cuando llegue a cero
+                if (tiempoRestante < 0) {
+                    clearInterval(intervalo);
+                    //document.getElementById('contador').textContent = '¡Tiempo agotado!';
+                }
+            }, 1000); // Intervalo de actualización: 1 segundo
+        }
+
+        // Iniciar el contador cuando se cargue la página
+        window.onload = function () {
+            iniciarContador();
+        }
+    </script>
+    <!-- SCRIPT DEL CALENDARIO -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js"></script>
+    <script>
+        const MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Novimiembre', 'Diciembre'];
+        const DAYS = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('app', () => ({
+                dateFrom: null,
+                showDatepicker: false,
+                showFromHourPicker: false,
+                showToHourPicker: false,
+                timePickerDisabled: true,
+                outputDateToValue: '',
+                currentDate: null,
+                dateFrom: null,
+                dateTo: null,
+                endToShow: '',
+                hour24FromValue: 0,
+                hour24ToValue: 23,
+                minuteFromValue: '00',
+                minuteToValue: '59',
+                selecting: false,
+                month: '',
+                year: '',
+                no_of_days: [],
+                blankdays: [],
+                hoursFrom: [],
+                hoursTo: [],
+                minutesFrom: [],
+                minutesTo: [],
+                meridiemsFrom: [],
+                meridiemsTo: [],
+                showDatepickerRange: false,
+                showDatepickerSingle: false,
+                boletoAbierto: false,
+                showTicketSelector: false,
+                openDatepickerRange() {
+                    this.showDatepickerRange = true;
+                },
+
+                openDatepickerSingle() {
+                    this.showDatepickerSingle = true;
+                },
+
+                convertFromYmd(dateYmd) {
+                    const year = Number(dateYmd.substr(0, 4));
+                    const month = Number(dateYmd.substr(5, 2)) - 1;
+                    const date = Number(dateYmd.substr(8, 2));
+
+                    return new Date(year, month, date);
+                },
+
+                convertToYmd(dateObject) {
+                    const year = dateObject.getFullYear();
+                    const month = dateObject.getMonth() + 1;
+                    const date = dateObject.getDate();
+
+                    return year + "-" + ('0' + month).slice(-2) + "-" + ('0' + date).slice(-2);
+                },
+
+                init() {
+                    this.boletoAbierto = false;
+                    if (!this.dateFrom) {
+                        if (this.dateFromYmd) {
+                            this.dateFrom = this.convertFromYmd(this.dateFromYmd);
+                        }
+                    }
+                    if (!this.dateTo) {
+                        if (this.dateToYmd) {
+                            this.dateTo = this.convertFromYmd(this.dateToYmd);
+                        }
+                    }
+                    if (!this.dateFrom) {
+                        this.dateFrom = this.dateTo;
+                    }
+                    if (!this.dateTo) {
+                        this.dateTo = this.dateFrom;
+                    }
+                    if (this.endToShow === 'from' && this.dateFrom) {
+                        this.currentDate = this.dateFrom;
+                    } else if (this.endToShow === 'to' && this.dateTo) {
+                        this.currentDate = this.dateTo;
+                    } else {
+                        this.currentDate = new Date();
+                    }
+                    currentMonth = this.currentDate.getMonth();
+                    currentYear = this.currentDate.getFullYear();
+                    if (this.month !== currentMonth || this.year !== currentYear) {
+                        this.month = currentMonth;
+                        this.year = currentYear;
+                        this.getNoOfDays();
+                    }
+                },
+
+
+                isToday(date) {
+                    const today = new Date();
+                    const d = new Date(this.year, this.month, date);
+
+                    return today.toDateString() === d.toDateString();
+                },
+
+                isDateFrom(date) {
+                    const d = new Date(this.year, this.month, date);
+
+                    if (!this.dateFrom) {
+                        return false;
+                    }
+
+                    return d.getTime() === this.dateFrom.getTime();
+                },
+
+                isDateTo(date) {
+                    const d = new Date(this.year, this.month, date);
+
+                    if (!this.dateTo) {
+                        return false;
+                    }
+
+                    return d.getTime() === this.dateTo.getTime();
+                },
+
+                isInRange(date) {
+                    const d = new Date(this.year, this.month, date);
+
+                    return d > this.dateFrom && d < this.dateTo;
+                },
+
+                outputDateValues() {
+                    if (this.dateFrom) {
+                        const timeFromString = this.getTimeString('from');
+                        const dateFromString = this.convertToYmd(this.dateFrom);
+                        const dateTimeFrom = new Date(dateFromString + 'T' + timeFromString);
+                    }
+                    if (this.boletoAbierto) {
+                        this.outputDateToValue = "Boleto abierto";
+                    } else {
+                        // Resto del código que actualiza las fechas como lo tienes actualmente
+                    }
+                    this.showDatepickerSingle = !this.showDatepickerSingle;
+                    this.endToShow = '';
+                    this.showDatepickerSingle = !this.showDatepickerSingle;
+                    this.endToShow = '';
+                    this.showTicketSelector = true;
+                    document.getElementById('ticketSelector').classList.remove('hidden');
+                },
+
+                formatDateTime(dateTime, meridiem) {
+                    const dayName = DAYS[dateTime.getDay()];
+                    const month = MONTH_NAMES[dateTime.getMonth()];
+                    const date = dateTime.getDate();
+                    const year = dateTime.getFullYear();
+                    //const second  = dateTime.getSeconds().toString().padStart(2, '0');
+                    return dayName + ' ' + month + ' ' + date + ' ' + year + ' ' + hourString + ':' + minute + meridiem;
+                },
+
+                getTimeString(end) {
+                    const hour = end === 'from' ? this.hour24FromValue : this.hour24ToValue;
+                    const minute = end === 'from' ? this.minuteFromValue : this.minuteToValue;
+                    const second = end === 'from' ? '00' : '59';
+                    return hour.toString().padStart(2, '0') + ':' + minute + ':' + second;
+                },
+
+                getDateValue(date, temp) {
+                    // if we are in mouse over mode but have not started selecting a range, there is nothing more to do.
+                    if (temp && !this.selecting) {
+                        return;
+                    }
+                    let selectedDate = new Date(this.year, this.month, date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0); // Establecer la hora en 00:00:00 para comparar solo las fechas
+                    if (selectedDate < today) {
+                        return;
+                    }
+                    if (this.endToShow === 'from') {
+                        this.dateFrom = selectedDate;
+                        if (!this.dateTo) {
+                            this.dateTo = selectedDate;
+                        } else if (selectedDate > this.dateTo) {
+                            this.endToShow = 'to';
+                            this.dateFrom = this.dateTo;
+                            this.dateTo = selectedDate;
+                        }
+                    } else if (this.endToShow === 'to') {
+                        this.dateTo = selectedDate;
+                        if (!this.dateFrom) {
+                            this.dateFrom = selectedDate;
+                        } else if (selectedDate < this.dateFrom) {
+                            this.endToShow = 'from';
+                            this.dateTo = this.dateFrom;
+                            this.dateFrom = selectedDate;
+                        }
+                    }
+                    this.timePickerDisabled = !this.dateFrom;
+                    this.showDatepicker = false;
+
+                    if (!temp) {
+                        this.selecting = !this.selecting;
+                    }
+                    this.showTicketSelector = true;
+                },
+
+                getNoOfDays() {
+                    let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
+
+                    // find where to start calendar day of week
+                    let dayOfWeek = new Date(this.year, this.month).getDay();
+                    let blankdaysArray = [];
+                    for (var i = 1; i <= dayOfWeek; i++) {
+                        blankdaysArray.push(i);
+                    }
+
+                    let daysArray = [];
+                    for (var i = 1; i <= daysInMonth; i++) {
+                        daysArray.push(i);
+                    }
+
+                    this.blankdays = blankdaysArray;
+                    this.no_of_days = daysArray;
+                },
+
+                closeDatepicker() {
+                    this.endToShow = '';
+                    this.showDatepicker = false;
+                },
+                formatDate(date) {
+                    if (date === null) {
+                        return ""; // O cualquier otro valor que desees para representar una fecha no definida
+                    }
+                    const day = ('0' + date.getDate()).slice(-2);
+                    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    const year = date.getFullYear();
+                    return `${day}/${month}/${year}`;
+                },
+
+                dateFrom: null, // Agrega este valor inicial
+                dateTo: null,   // Agrega este valor inicial
+
+            }))
+        })
+    </script>
+    <script>
+        /**document.addEventListener('DOMContentLoaded', function () {
+            const tipoBoleto = document.getElementById('tipoBoleto').value;
+ 
+            if (tipoBoleto === "regreso_abierto") {
+                document.getElementById('datepickerSingle').style.display = 'block';
+            } else if (tipoBoleto === "fecha_especifica") {
+                document.getElementById('datepickerRange').style.display = 'block';
+            } else {
+                document.getElementById('datepickerSingle').style.display = 'block';
+            }
+        });**/
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Abre el modal cuando se hace clic en el ícono
+            document.getElementById('continuarBtn').addEventListener('click', function () {
+                document.getElementById('myModal').classList.remove('hidden');
+            });
+
+            // Cierra el modal cuando se hace clic en la "x"
+            document.getElementById('closeModal').addEventListener('click', function () {
+                document.getElementById('myModal').classList.add('hidden');
+            });
+
+            // Redirige a otra página cuando se hace clic en el botón dentro del modal
+            document.getElementById('redirectToPage').addEventListener('click', function () {
+                window.location.href = "tu_otra_pagina.html";
+            });
+        });
+    </script>
+    <script>
+        const apiUrl = 'https://venta.odm.com.mx/netScripts/Request.aspx?APPNAME=Navegante&PRGNAME=PersonalizarVR&ARGUMENTS=-A900894,-A31/12/2023,-A30/12/2023,-A02:35,-A900894,-A10/11/2019,-A14/11/2109,-A02:35,-A007,-A007,-A,-A,-A,-A,-A,-A15035237,-A3.3455"';
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Ejecutar el script usando eval
+                const scriptStartIndex = data.indexOf('(');
+                const scriptEndIndex = data.lastIndexOf(')') + 1;
+
+                if (scriptStartIndex !== -1 && scriptEndIndex !== -1) {
+                    const scriptData = data.substring(scriptStartIndex, scriptEndIndex);
+                    const jsonData = eval(scriptData);
+
+                    // Trabajar con los datos en formato JSON
+                    console.log('Datos JSON:', jsonData);
+                } else {
+                    throw new Error('No se encontró un script válido en la respuesta');
+                }
+            })
+            .catch(error => {
+                // Manejar errores
+                console.error('Error en la solicitud:', error);
+            });
+    </script>
+</body>
+
+</html>

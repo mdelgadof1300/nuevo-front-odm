@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="pagmaestra-favicon.ico">
+    <title> Omnibus de México | Boletos de Autobús con Descuento </title>
+    <meta name="description"
+        content="Omnibus de México  compra tus boletos de autobús en línea y obten 10% de descuento en viaje sencillo ó 15% en viaje redondo *Aplican restricciones. *" />
+
+    <script src="fontawesome.js"></script>
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Select2 CSS -->
+    <link href="select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="slick-carousel.css" />
+    <link rel="stylesheet" type="text/css" href="slick-theme.css" />
+    <style>
+        /* Estilo para el logo de autobús */
+        .input-with-svg {
+            position: relative;
+        }
+
+        .input-with-svg .bus-logo {
+            position: absolute;
+            left: 10px;
+            /* Ajusta la posición del SVG */
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Ajusta la altura del select al mostrar la opción seleccionada */
+        .select2-container--default .select2-selection--single {
+            height: 50px;
+            /* Ajusta la altura según tu preferencia */
+            line-height: 44px;
+            /* Asegura que el texto esté centrado verticalmente */
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            padding-left: 72px;
+            padding-top: 10px;
+            /* Ajusta el valor según tu preferencia */
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 45px;
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            width: 20px;
+        }
+
+        .select2-container--default {
+            width: 100% !important;
+        }
+
+        @media (min-width: 1024px) {
+            .input-with-svg {
+                width: 100%;
+                /* Cambia el valor de acuerdo a tus necesidades */
+                margin: 0 0.0rem;
+                /* Margen parejo en ambos lados */
+                padding: 0 0.5rem;
+                /* Relleno parejo en ambos lados */
+            }
+        }
+
+        @media (min-width: 1280x) {
+            .input-with-svg {
+                width: 100%;
+                /* Cambia el valor de acuerdo a tus necesidades */
+                margin: 0 0.5rem;
+                /* Margen parejo en ambos lados */
+                padding: 0 0.5rem;
+                /* Relleno parejo en ambos lados */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full lg:hidden flex justify-between items-center px-2 py-3">
+        <img src="logoODMplus.svg" alt="logoODMplus" class="mr-0 ml-1 sm:mx-auto sm:w-80" width="288px" height="10px">
+        <button id="open-modal" class="lg:hidden mr-3" aria-label="Abrir menú">
+            <svg class="fill-current h-8 w-8 text-[#003368] mr-0" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="modal-overlay"
+        class="hidden fixed top-0 right-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div id="modal" class="bg-white p-4 rounded-lg ml-36 mb-80 sm:ml-auto sm:mb-[295px] md:ml-[430px]">
+            <img src="logoODMplus.svg" alt="logoODM" class="w-full">
+            <a href="https://odm.com.mx/envios/dist"
+                class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="fas fa-shipping-fast mr-2 text-gray-500"></i> Envíos ODM
+            </a>
+            <a href="https://odm.com.mx/cobertura"
+                class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="fas fa-bus mr-2 text-gray-500"></i> Cobertura
+            </a>
+            <a href="https://odm.com.mx/puntosgoogle"
+                class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="fas fa-map mr-2 text-gray-500"></i> Puntos de venta
+            </a>
+            <a href="https://odm.com.mx/servicios"
+                class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="far fa-handshake mr-2 text-gray-500"></i> Servicios
+            </a>
+            <a href="https://venta.odm.com.mx/FacturacionElectronica/IndexFacturaElec.html?_gl=1*npi68v*_gcl_au*MzUyNDcxNDA2LjE2ODg0ODU4MDA.*_ga*NjAyODM2MzE2LjE2NzI0MjgyOTU.*_ga_6MKKJY80T1*MTY5MzQyMDU5MC4yNDQuMC4xNjkzNDIwNTkwLjYwLjAuMA.."
+                class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="fas fa-file-alt mr-2 text-gray-500"></i> Facturación
+            </a>
+            <a href="#" class="text-blue-800 sm:text-gray-600 hover:bg-gray-200 block mt-4 px-0 py-2">
+                <i class="fas fa-comments mr-2 text-gray-500"></i> Chat en línea
+            </a>
+        </div>
+    </div>
+    <div id="navbar" class="hidden lg:flex lg:bg-white lg:p-2 lg:rounded-lg xl:mx-28 2xl:mx-20">
+        <img src="logoODMplus.svg" alt="logoODM" class="xl:w-56 2xl:w-72 mt-0 mr-0" width="200px" height="10px">
+        <a href="https://odm.com.mx/envios/dist"
+            class="text-blue-800 sm:text-gray-600 xl:text-base hover:bg-gray-200 block mt-4 ml-3 mb-4 px-0 py-2 text-xs 2xl:text-lg">
+            <i class="fas fa-shipping-fast mr-2 lg:mr-0 xl:mr-0 2xl:mr-0 text-gray-500"></i> Envíos ODM
+        </a>
+        <a href="https://odm.com.mx/cobertura"
+            class="text-blue-800 sm:text-gray-600 xl:text-base hover:bg-gray-200 block mt-4 ml-3 px-0 py-2 text-xs 2xl:text-lg">
+            <i class="fas fa-bus mr-2 lg:mr-0 xl:mr-0 2xl:mr-0 text-gray-500"></i> Cobertura
+        </a>
+        <a href="https://odm.com.mx/puntosgoogle"
+            class="text-blue-800 sm:text-gray-600 xl:text-base hover:bg-gray-200 block mt-4 ml-3 px-0 py-2 text-xs 2xl:text-lg">
+            <i class="fas fa-map mr-2 lg:mr-0 xl:mr-0 2xl:mr-0 text-gray-500"></i> Puntos de venta
+        </a>
+        <a href="https://odm.com.mx/servicios"
+            class="text-blue-800 sm:text-gray-600 xl:text-base hover:bg-gray-200 block mt-4 ml-3 px-0 py-2 text-xs 2xl:text-lg">
+            <i class="far fa-handshake mr-2 lg:mr-0 xl:mr-0 2xl:mr-0 text-gray-500"></i> Servicios
+        </a>
+        <a href="https://venta.odm.com.mx/FacturacionElectronica/IndexFacturaElec.html?_gl=1*npi68v*_gcl_au*MzUyNDcxNDA2LjE2ODg4MDIzODA.*_ga*NjAyODM2MzE2LjE2NzI0MjgyOTU.*_ga_6MKKJY80T1*MTY5MzU4MjM4MC4yNC4wLjAuMC4wLjA.."
+            class="text-blue-800 sm:text-gray-600 xl:text-base hover:bg-gray-200 block mt-4 ml-3 px-0 py-2 text-xs 2xl:text-lg">
+            <i class="fas fa-file-alt mr-2 lg:mr-0 xl:mr-0 2xl:mr-0 text-gray-500"></i> Facturación
+        </a>
+        <div class="flex items-center ml-3">
+            <img src="Tel_Movil.svg" class="2xl:w-48" alt="telefono CETAC" width="160px" height="10px">
+            <button class="bg-[#C82333] text-white border-white rounded-lg ml-1 py-[4px] 2xl:py-2 px-3">
+                <a href="intercambio.html">Intercambio</a>
+            </button>
+        </div>
+    </div>
+
+
+    <hr class="w-full h-1.5 bg-[#C82333] pt-0 pb-0">
+
+    <div class="general h-full">
+        <div class="bg-[#1D93D2] lg:hidden">
+            <div class="w-full inline-flex items-center bg-[#1D93D2] pt-5">
+                <img src="Tel_Movil.svg" class="ml-8 sm:ml-14" alt="telefono CETAC" width="192px" height="10px">
+                <button class="bg-[#C82333] text-white border-white rounded-lg ml-1 py-[8px] px-3"><a
+                        href="intercambio.html">Intercambio</a></button>
+            </div>
+        </div>
+        <div class="bg-[#1D93D2]">
+            <form action="http://webq.odm.com.mx/odm/PASO1/paso1.aspx" enctype="multipart/form-data" name="formulario"
+                id="formulario" method="get">
+                <div
+                    class="ml-8 sm:ml-14 lg:ml-40 xl:ml-64 2xl:ml-[400px] pt-3 lg:pt-5 py-3 space-x-5 flex max-w-2xl mx-auto">
+
+                    <label class="flex items-center">
+                        <input type="radio" name="opcion" id="sencillo" class="form-radio text-green-400" checked>
+                        <span class="ml-2 text-white font-bold text-lg">Sencillo</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="opcion" id="redondo" class="form-radio text-green-400">
+                        <span class="ml-2 text-white font-bold text-lg">Redondo</span>
+                    </label>
+
+                </div>
+
+                <div
+                    class="lg:grid lg:grid-cols-3 lg:gap-1 mx-0 lg:mx-36 xl:mx-56 2xl:mx-96 justify-center items-center p-0 space-y-3 lg:space-y-0">
+                    <div class="input-with-svg mx-8 lg:mx-0  lg:col-span-1 px-0 sm:mx-10 lg:ml-0">
+                        <select id="origenSelect" name="origenCode">
+                            <option selected="selected" disabled="">¿De Dónde Sales?</option>
+                            <option value="ACR">Acambaro Gto</option>
+                            <option value="ACT">Actopan Hgo</option>
+                            <option value="AEA">Aeropuerto Mty. A N.l</option>
+                            <option value="NLU">Aeropuerto Felipe Angeles</option>
+                            <option value="CNJ">Agencia Conejo</option>
+                            <option value="APS">Agua Prieta Son</option>
+                            <option value="AGU2">Aguascalientes Agr. Norte</option>
+                            <option value="AGU">Aguascalientes C. Autobus</option>
+                            <option value="AHU">Ahuacatlán Nay</option>
+                            <option value="AHT">Ahuetita</option>
+                            <option value="ALL">Allende Chih</option>
+                            <option value="CAO">Alvaro Obregon Chih</option>
+                            <option value="SAR">Altamira Tamaulipas</option>
+                            <option value="ANG">Angostura Chih</option>
+                            <option value="ASC">Ascención Chih</option>
+                            <option value="ATA">Atlacomulco Mex</option>
+                            <option value="ANA">Santa Ana Sonora</option>
+                            <option value="BAC">Bachiniva Chih</option>
+                            <option value="BJU">Benito Juarez Chih</option>
+                            <option value="SCD">Cadereyta Jimenez N.l.</option>
+                            <option value="CAC">Culiacán, Sin.</option>
+                            <option value="CAB">Caborca Sonora</option>
+                            <option value="CCA">Camargo Chih</option>
+                            <option value="CGT">Camargo Tamps.</option>
+                            <option value="C101">Campo 101 Chih</option>
+                            <option value="CSM">Campo Seis Y Medio Chih</option>
+                            <option value="CNE">Cananea Son</option>
+                            <option value="CIJ">Cañada De Islas Jal</option>
+                            <option value="CAS">Casas Grandes Chih</option>
+                            <option value="CYA">Celaya Gto</option>
+                            <option value="CHA">Chapulhuacán Hgo</option>
+                            <option value="CUU">Chihuahua Central Autobus</option>
+                            <option value="PIM">Chihuahua Pistolasmeneses</option>
+                            <option value="ZOO">Chihuahua Zootecnia</option>
+                            <option value="CHIN">China N.l.</option>
+                            <option value="ATG">Ciudad Altamirano Gro</option>
+                            <option value="CTO">Ciudad Cuauhtemoc Chih</option>
+                            <option value="DEL">Ciudad Delicias Chih</option>
+                            <option value="CGZ">Ciudad Guzman Jal</option>
+                            <option value="HID">Ciudad Hidalgo Mich</option>
+                            <option value="JIM">Ciudad Jimenez Chih</option>
+                            <option value="CJS">Ciudad Juarez Chih</option>
+                            <option value="CDM">Ciudad Mante Tamps</option>
+                            <option value="MIE">Ciudad Mier Tamps.</option>
+                            <option value="CEN">Ciudad Obregon, Son.</option>
+                            <option value="CEM">Ciudad Valles Slp</option>
+                            <option value="CVM">Ciudad Victoria Tamps</option>
+                            <option value="CIN">Col. Independencia Chih</option>
+                            <option value="COL">Colima Col</option>
+                            <option value="QVO">Colonia Quevedo Chih</option>
+                            <option value="CLT">Colotlán Jal</option>
+                            <option value="COO">Concepción Del Oro Zac</option>
+                            <option value="CBC">Corral Blanco</option>
+                            <option value="BEJ">Crucero Belén Jal</option>
+                            <option value="CPA">Crucero Palomas Chih</option>
+                            <option value="CTP">Crucero Tepatitlán Jal</option>
+                            <option value="CUE">Cuencamé Dgo</option>
+                            <option value="CUI">Cuitaca Son</option>
+                            <option value="CUT">Cutzamala Gro</option>
+                            <option value="DHI">Dolores Hidalgo Gto</option>
+                            <option value="DGO">Durango Central Autobus</option>
+                            <option value="EBA">Ebano Slp</option>
+                            <option value="BAT">El Batán Jal</option>
+                            <option value="ROD">El Rodeo Dgo</option>
+                            <option value="EML">Empalme, Sonora</option>
+                            <option value="ENC">Encarnación De Díaz Jal</option>
+                            <option value="FIM">Fco. I. Madero Dgo</option>
+                            <option value="FRE">Fresnillo Zac</option>
+                            <option value="GAL">Galeana Chih</option>
+                            <option value="VGC">Gema Cuitzeo Mich</option>
+                            <option value="GBRA">General Bravo N.l.</option>
+                            <option value="GFA">Gomez Farias Chih</option>
+                            <option value="GOP">Gomez Palacio C. Autobus</option>
+                            <option value="HAM">Terminal Hamburgo Gomez Palacio</option>
+                            <option value="SLU">Granjas Sta. Lucia Dgo</option>
+                            <option value="GDL">Guadalajara Jal. Modulo 6</option>
+                            <option value="GD1">Guadalajara Modulo 1 1/2</option>
+                            <option value="GCH">Guamuchil Sinaloa</option>
+                            <option value="GYM">Guaymas, Sonora</option>
+                            <option value="GSV">Guasave Sinaloa</option>
+                            <option value="AEG">Aeropuerto Gdl Jal</option>
+                            <option value="GVI">Guadalupe Victoria Dgo</option>
+                            <option value="GTO">Guanajuato Gto</option>
+                            <option value="HA2">Hamburgo Plaza Palmas Gomez Palacio</option>
+                            <option value="HMO">Hermosillo C. Autobuses</option>
+                            <option value="HET">Hermosillo Terminal</option>
+                            <option value="AHG">Hidalgo Reynosa</option>
+                            <option value="AHG">Hidalgo Reynosa Tamps</option>
+                            <option value="HUA">Huauchinango Pue</option>
+                            <option value="HUE">Huejucar Jal</option>
+                            <option value="ZAR">Ignacio Zaragoza Chih</option>
+                            <option value="IPO">Irapuato Gto</option>
+                            <option value="IXP">Ixtapa Zihuatanejo Gro</option>
+                            <option value="IXT">Ixtlan Del Rio Nay</option>
+                            <option value="JGY">Jagueyes Chih</option>
+                            <option value="JAP">Jalpa Zac</option>
+                            <option value="JAN">Janos Chih</option>
+                            <option value="JAR">Jaralillo Jal</option>
+                            <option value="JER">Jerez Zac</option>
+                            <option value="JSA">Jesus Aguirre</option>
+                            <option value="JU2">Juan Aldama 2 Zac</option>
+                            <option value="JUA">Juan Aldama Zac</option>
+                            <option value="JUC">Juchipila. Zac.</option>
+                            <option value="LBB">La Barca Jal</option>
+                            <option value="LCM">La Copa Matamoros Tamps</option>
+                            <option value="LJA">La Joya Coah</option>
+                            <option value="MIN">La Mina Chih</option>
+                            <option value="LPI">La Piedad Mich</option>
+                            <option value="LPN">La Pinta Chih</option>
+                            <option value="LQE">La Quemada Chih</option>
+                            <option value="LZA">La Zarca Dgo</option>
+                            <option value="LGS">Lagos De Moreno Jal</option>
+                            <option value="LAG">Lagunitas Chih</option>
+                            <option value="LNI">Las Nieve Dgo</option>
+                            <option value="LVA">Las Varas Chih</option>
+                            <option value="LAC">Lazaro Cardenas Chih</option>
+                            <option value="LZC">Lazaro Cardenas Mich</option>
+                            <option value="LEB">Lebaron Chih</option>
+                            <option value="BJX">Leon Gto</option>
+                            <option value="LOR">Loreto Zac</option>
+                            <option value="LRY">Los Reyes Mich</option>
+                            <option value="LMM">Los Mochis, Sin.</option>
+                            <option value="LNA">Linares Nl.</option>
+                            <option value="LMO">Luis Moya. Zac.</option>
+                            <option value="ZLO">Manzanillo Col</option>
+                            <option value="MVT">Maravatio Mich</option>
+                            <option value="PLF">Mat. Plaza Fiesta Tamps</option>
+                            <option value="MAC">Matamoros Coahuila Coah</option>
+                            <option value="MAM">Matamoros. Tamps.</option>
+                            <option value="MHN">Matehuala Noreste</option>
+                            <option value="MA57">Matehuala Terminal 57</option>
+                            <option value="MLP">Matlapa Slp</option>
+                            <option value="MZT">Mazatlan Sin.</option>
+                            <option value="MDM">Mercado Del Mar Zapopan Centro</option>
+                            <option value="MTP">Metro Plaza</option>
+                            <option value="MXL">Mexicali B.C.</option>
+                            <option value="SPC">Mexicali Plaza Cibeles</option>
+                            <option value="MEX">Mexico Central Norte</option>
+                            <option value="OBS">Mexico Observatorio</option>
+                            <option value="MEZ">Mezcales, Nay</option>
+                            <option value="MAL">Miguel Aleman. Tamps.</option>
+                            <option value="MTY">Monterrey Central Autobus</option>
+                            <option value="MTF">Monterrey Terminal Fierro</option>
+                            <option value="SUD">Monterrey Universidad</option>
+                            <option value="MLM">Morelia Mich</option>
+                            <option value="MRL">Moroleon Gto</option>
+                            <option value="LOV">Monclova Coah.</option>
+                            <option value="MNR">Montemorelos Nl.</option>
+                            <option value="MOY">Moyahua Zac</option>
+                            <option value="NOC">Nochistlán Zac</option>
+                            <option value="NOG">Nogales Son</option>
+                            <option value="NDI">Nombre De Dios Dgo</option>
+                            <option value="NLD">Nuevo Laredo Tamps.</option>
+                            <option value="NAV">Navojoa Sonora</option>
+                            <option value="NAJ">Navojoa Centro</option>
+                            <option value="OCO">Ocotlan Jal</option>
+                            <option value="OJI">Ojinaga Chih</option>
+                            <option value="OCN">Ojo Caliente Nte-sur Zac</option>
+                            <option value="PCA">Pachuca Hgo</option>
+                            <option value="PAR">Parral. Chih.</option>
+                            <option value="PJM">Penjamo Gto.</option>
+                            <option value="PVR">Puerto Vallarta Jal.</option>
+                            <option value="SAC">Plaza Agricultores</option>
+                            <option value="PAG">Suc. Paseos Agu.</option>
+                            <option value="PTC">Patzcuaro Mich</option>
+                            <option value="PEB">Peña Blanca Chih</option>
+                            <option value="PBC">Peñon Blanco Dgo</option>
+                            <option value="SPM">Periférico Matamoro tamps</option>
+                            <option value="PAZ">Poza Rica Ver</option>
+                            <option value="PUR">Puruandiro, Michoacan</option>
+                            <option value="VLL">Nuevo Vallarta, Nay.</option>
+                            <option value="PPA">Puerto Palomas Chih.</option>
+                            <option value="QET">Queretaro Qro</option>
+                            <option value="RCO">Rancho Colorado Chih</option>
+                            <option value="REX">Reynosa. Tams.</option>
+                            <option value="RFM">Ricardo Flores Magon. Chi</option>
+                            <option value="RIB">Rio Bravo Tamps.</option>
+                            <option value="RGR">Rio Grande Zac</option>
+                            <option value="SAI">Sain Alto Zac</option>
+                            <option value="SMX">Salamanca Gto</option>
+                            <option value="SLN">Salinas Slp</option>
+                            <option value="SWN">Saltillo Norte</option>
+                            <option value="SLW">Saltillo Central Autobus</option>
+                            <option value="SIO">Saltillo Suc. El Indio</option>
+                            <option value="SAV">Salvatierra Gto</option>
+                            <option value="SBV">San Buenaventura. Chih.</option>
+                            <option value="SFG">San Felipe Gto Gto</option>
+                            <option value="SJL">San Juan De Los Lagos jal</option>
+                            <option value="SJQ">San Juan Del Rio, Qro.</option>
+                            <option value="LZO">San Lorenzo Chih</option>
+                            <option value="UAC">San Luis Rio Colorado Son.</option>
+                            <option value="SPA">San Luis De La Paz Gto</option>
+                            <option value="SLP">San Luis Potosi. Slp.</option>
+                            <option value="SMA">San Miguel Allende Gto</option>
+                            <option value="APU">San Pedro Apulco Zac</option>
+                            <option value="STD">Santa Maria Del Oro Dgo</option>
+                            <option value="SAU">Saucillo Chih</option>
+                            <option value="SIL">Silao Gto</option>
+                            <option value="SOM">Sombrerete Zac</option>
+                            <option value="SON">Sonoyta Sonora</option>
+                            <option value="SOT">Soto Mainez Chih</option>
+                            <option value="CFN">Suc Contraflujo Norte</option>
+                            <option value="CZO">Suc. El Carrizo Hgo. Dgo</option>
+                            <option value="MXS">Suc. Mexticacan Jal</option>
+                            <option value="STZ">Suc. Tecnológico Zac</option>
+                            <option value="SMOR">Sucursal Morelos</option>
+                            <option value="PA2">Sucursal Parral Chih</option>
+                            <option value="SCA">Sucursal Santa Catarina</option>
+                            <option value="SLX">Super Lexo</option>
+                            <option value="TAB">Tabasco. Zac.</option>
+                            <option value="TMZ">Tamazunchale Slp</option>
+                            <option value="TAH">Tamiahua Ver</option>
+                            <option value="TAM">Tampico Central Autobus</option>
+                            <option value="TMN">Tampico Norte Tamps</option>
+                            <option value="TLE">Tampico Terminal Ejercito</option>
+                            <option value="TAN">Tamuin Slp</option>
+                            <option value="TEC">Tecoman Col</option>
+                            <option value="TEJ">Tejupilco Mex</option>
+                            <option value="TEO2">Teocaltiche 2 Jal</option>
+                            <option value="TEO">Teocaltiche Jal</option>
+                            <option value="TPT">Tepatitlan Jal</option>
+                            <option value="TNY">Tepic Central Autobus Nay</option>
+                            <option value="CLO">Tepic Terminal Colosio</option>
+                            <option value="TPZ">Tepotzotlán Mex</option>
+                            <option value="TEU">Teul De Glez Ortega Zac</option>
+                            <option value="TLA">Tlaltenango Zac</option>
+                            <option value="TIJ">Tijuana B.C.</option>
+                            <option value="TLC">Toluca Mex</option>
+                            <option value="TRC">Torreón Coah</option>
+                            <option value="TLI">Tren Ligero Jal</option>
+                            <option value="TCA">Tres Castillos. Chih.</option>
+                            <option value="THG">Tula Hgo</option>
+                            <option value="TUJ">Tuxpan Jalisco Jal</option>
+                            <option value="TXM">Tuxpan Michoacán Mich</option>
+                            <option value="TCT">Tuxpan Term. Centro Ver</option>
+                            <option value="TXP">Tuxpan Veracruz</option>
+                            <option value="URI">Uriangato</option>
+                            <option value="UPN">Uruapan Mich</option>
+                            <option value="VHT">Valle Hermoso Tamps</option>
+                            <option value="VENC">Venecia Tamps.</option>
+                            <option value="VGE">Vicente Guerrero Dgo</option>
+                            <option value="VAH">Villa Ahumada Chih</option>
+                            <option value="VOC">Villa Ocampo. Dgo</option>
+                            <option value="VIL">Villanueva Zac</option>
+                            <option value="VREA">Villarreales</option>
+                            <option value="VIG">Villas De Guadiana Dgo</option>
+                            <option value="YAH">Yahualica Jal</option>
+                            <option value="YUR">Yuriria Gto</option>
+                            <option value="ZCL">Zacatecas Central Autobus</option>
+                            <option value="GZA">Zacatecas Trmnl Guadalupe</option>
+                            <option value="ZAM">Zamora Mich</option>
+                            <option value="ZPP">Zapopan Jal</option>
+                            <option value="ZIH">Zihuatanejo Gro</option>
+                            <option value="ZTC">Zitacuaro Mich</option>
+                        </select>
+                        <img class="bus-logo" src="icono_ascenso.svg" alt="Autobús"
+                            style="width: 50px; height: 50px; margin-left: 10px">
+                    </div>
+
+                    <div class="input-with-svg mx-8 lg:mx-0 lg:col-span-1 px-0 sm:mx-10 lg:ml-0">
+                        <select id="destinoSelect" name="destinoCode">
+                            <option selected="selected" disabled="">¿A dónde viajas?</option>
+                        </select>
+                        <img class="bus-logo" src="icono_descenso.svg" alt="Autobús"
+                            style="width: 50px; height: 50px; margin-left: 10px">
+                    </div>
+
+                    <div class="hidden lg:flex p-0">
+                        <div class="mt-0 w-full">
+                            <div class="input-with-svg mx-9 sm:ml-[50px] lg:ml-0">
+                                <button id="buscarViajeBtn"
+                                    class="w-full bg-[#C82333] uppercase text-white font-bold text-lg rounded-lg py-3 px-7"
+                                    type="submit" disabled>
+                                    Buscar viaje
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full hidden lg:col-span-1" id="datepickerSingle" x-show="showDatepicker">
+                        <div x-data="app" x-cloak class="w-full">
+                            <div class="container py-0 md:py-0">
+                                <div class="flex items-center mx-0 sm:ml-0 w-full">
+                                    <div class="flex space-x-8 lg:space-x-4 w-full" @keydown.escape="closeDatepicker()"
+                                        @click.outside="closeDatepicker()">
+                                        <div class="input-with-svg mx-6 sm:mx-10 lg:col-span-1 px-2 sm:px-0 w-full">
+                                            <div class="relative flex items-center">
+                                                <input type="text"
+                                                    @click="endToShow = 'from'; init(); showDatepicker = true"
+                                                    :value="boletoAbierto ? 'FECHA ABIERTA' : formatDate(dateTo)"
+                                                    :class="{'font-normal': endToShow == 'from' }"
+                                                    @click="selectDateFrom" autocomplete="off"
+                                                    class="focus:outline-none border-none w-full text-center text-base placeholder-gray-800 rounded-md border-r border-gray-300 h-12 sm:w-full lg:w-[310px] 2xl:w-[370px] md:w-full"
+                                                    placeholder="Fecha de ida" id="fechasalida1" name="fechSalida" />
+                                                <img src="calendario.svg" alt="" class="absolute w-8 h-8 ml-8 lg:ml-7">
+                                                <input type="text" aria-label="fechaRegreso" style="display: none;"
+                                                    class="form-control" name="fechRegreso" id="fecharegreso"
+                                                    autocomplete="off" readonly="readonly" value="_" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="absolute bg-white mt-2 rounded-lg shadow p-4 sm:w-80 w-10/12 z-50"
+                                            x-show="showDatepicker" x-transition>
+                                            <div class="flex flex-col items-center">
+
+                                                <div class="w-full flex justify-between items-center mb-2">
+                                                    <span x-text="MONTH_NAMES[month]"
+                                                        class="text-lg font-bold text-gray-800"></span>
+                                                    <span x-text="year"
+                                                        class="ml-1 text-lg text-gray-600 font-normal"></span>
+                                                    <div class="pl-16">
+                                                        <button type="button"
+                                                            class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                            @click="if (month == 0) {year--; month=11;} else {month--;} getNoOfDays()">
+                                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M15 19l-7-7 7-7" />
+                                                            </svg>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                            @click="if (month == 11) {year++; month=0;} else {month++;}; getNoOfDays()">
+                                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M9 5l7 7-7 7" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-full flex flex-wrap mb-3 -mx-1">
+                                                    <template x-for="(day, index) in DAYS" :key="index">
+                                                        <div style="width: 14.26%" class="px-1">
+                                                            <div x-text="day"
+                                                                class="text-gray-800 font-medium text-center text-xs">
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+
+                                                <div class="flex flex-wrap -mx-1">
+                                                    <template x-for="blankday in blankdays">
+                                                        <div style="width: 14.28%"
+                                                            class="text-center border p-1 border-transparent text-sm">
+                                                        </div>
+                                                    </template>
+                                                    <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                                                        <div style="width: 14.28%">
+                                                            <div @click="getDateValue(date, false); showTicketSelector = true"
+                                                                @mouseenter="getDateValue(date, true)" x-text="date"
+                                                                class="p-1 cursor-pointer text-center text-sm leading-none leading-loose transition ease-in-out duration-100"
+                                                                :class="{'font-bold': isToday(date) == true, 'bg-blue-800 text-white rounded-l-full': isDateFrom(date) == true, 'bg-blue-800 text-white rounded-r-full': isDateFrom(date) == true, 'bg-blue-200': isInRange(date) == true }">
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <p class="px-0 py-1 text-blue-500 text-xs">
+                                                        ¿No conoces tu fecha de salidas? Puedes dejar tu boleto abierto
+                                                    </p>
+
+                                                    <button type="button"
+                                                        @click="boletoAbierto = true; outputDateValues(); showDatepicker=false; showTicketSelector = true"
+                                                        id="boletoAbiertoButton"
+                                                        class="px-10 py-1 border border-blue-600 bg-[#C82333] hover:bg-blue-300 text-white rounded-md">Boleto
+                                                        abierto
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full  hidden lg:col-span-1" id="datepickerRange">
+                        <div x-data="app" x-cloak class="w-full">
+                            <div class="container mx-auto py-0 md:py-0">
+                                <div class="flex items-center sm:ml-0 lg:ml-0">
+                                    <div class="flex space-x-8 lg:space-x-4 w-full" @keydown.escape="closeDatepicker()"
+                                        @click.outside="closeDatepicker()">
+                                        <div
+                                            class="input-container flex justify-between flex-nowrap mx-8 sm:mx-10 lg:mx-0 w-full max-w-[1500px]">
+                                            <div class="input-container flex items-center">
+                                                <div
+                                                    class="input-with-svg mr-2 sm:mr-28 sm:ml-0 lg:col-span-1 w-full lg:mr-0">
+                                                    <div class="relative">
+                                                        <img src="calendario.svg" alt=""
+                                                            class="hidden absolute w-8 h-8 ml-3 mt-1.5 sm:ml-8 lg:ml-2">
+                                                        <input type="text"
+                                                            @click="endToShow = 'from'; init(); showDatepicker = true"
+                                                            :value="formatDate(dateFrom)"
+                                                            :class="{'font-normal': endToShow == 'from' }"
+                                                            autocomplete="off" id="fechasalida2" name="fechSalida"
+                                                            class="w-full border border-gray-300 rounded-lg py-2 lg:w-[125%] w-125 xl:w-[115%] w-115  text-center pr-3 focus:outline-none h-12 text-base placeholder-gray-800"
+                                                            placeholder="Fecha de ida" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-container flex items-center">
+                                                <div
+                                                    class="input-with-svg mx-0 sm:ml-0 mr-0 sm:mr-0 lg:col-span-1 px-0 w-full">
+                                                    <div class="relative">
+                                                        <input type="text"
+                                                            @click="endToShow = 'to'; init(); showDatepicker = true"
+                                                            :class="{'font-normal': endToShow == 'to' }"
+                                                            name="fechRegreso" id="fecharegreso" @click="selectDateFrom"
+                                                            autocomplete="off" value="_"
+                                                            class="w-full border border-gray-300 rounded-lg py-2 lg:w-[118%] w-118 xl:w-[115%] w-115  text-center pr-3 2xl:pr-0 focus:outline-none h-12 text-base placeholder-gray-800"
+                                                            :value="boletoAbierto ? 'FECHA ABIERTA' : formatDate(dateTo)"
+                                                            :placeholder="boletoAbierto ? 'ABIERTO' : 'Fecha de regreso'" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="absolute bg-white mt-2 rounded-lg shadow p-4 sm:w-80 w-10/12 z-50"
+                                            x-show="showDatepicker" x-transition>
+                                            <div class="flex flex-col items-center">
+
+                                                <div class="w-full flex justify-between items-center mb-2">
+                                                    <span x-text="MONTH_NAMES[month]"
+                                                        class="text-lg font-bold text-gray-800"></span>
+                                                    <span x-text="year"
+                                                        class="ml-1 text-lg text-gray-600 font-normal"></span>
+                                                    <div class="pl-16">
+                                                        <button type="button"
+                                                            class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                            @click="if (month == 0) {year--; month=11;} else {month--;} getNoOfDays()">
+                                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M15 19l-7-7 7-7" />
+                                                            </svg>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                            @click="if (month == 11) {year++; month=0;} else {month++;}; getNoOfDays()">
+                                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M9 5l7 7-7 7" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-full flex flex-wrap mb-3 -mx-1">
+                                                    <template x-for="(day, index) in DAYS" :key="index">
+                                                        <div style="width: 14.26%" class="px-1">
+                                                            <div x-text="day"
+                                                                class="text-gray-800 font-medium text-center text-xs">
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+
+                                                <div class="flex flex-wrap -mx-1">
+                                                    <template x-for="blankday in blankdays">
+                                                        <div style="width: 14.28%"
+                                                            class="text-center border p-1 border-transparent text-sm">
+                                                        </div>
+                                                    </template>
+                                                    <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                                                        <div style="width: 14.28%">
+                                                            <div @click="getDateValue(date, false)" x-text="date"
+                                                                class="p-1 cursor-pointer text-center text-sm leading-none leading-loose transition ease-in-out duration-100"
+                                                                :class="{'font-bold': isToday(date) == true, 'bg-blue-800 text-white rounded-l-full': isDateFrom(date) == true, 'bg-blue-800 text-white rounded-r-full': isDateTo(date) == true, 'bg-blue-200': isInRange(date) == true }">
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <p class="px-0 py-1 text-blue-500 text-xs">
+                                                        ¿No conoces tu fecha de regreso? Puedes dejar tu boleto abierto
+                                                    </p>
+
+                                                    <button type="button"
+                                                        @click="boletoAbierto = true; outputDateValues(); showDatepicker=false; showTicketSelector = true"
+                                                        id="boletoAbiertoButton"
+                                                        class="px-10 py-1 border border-blue-600 bg-[#C82333] hover:bg-blue-300 text-white rounded-md">Boleto
+                                                        abierto
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="origenText" value="MEX">
+                    <input type="hidden" name="destinoText" value="TIJ">
+                    <input type="hidden" name="viajeredondo" value="1">
+                    <input type="hidden" name="promociones" value="1">
+
+                    <!-- VARIABLES IMPORTANTEs -->
+                    <!-- <input type="hidden" value="ACR" name="destinoCode" id="destinos" /> -->
+                    <input type="hidden" value="ODM" name="marca" id="marca" />
+                    <input type="hidden" value="escritorio" name="version" id="version" />
+                    <input type="hidden" value="_" name="reservacionText" id="reservacionText" />
+
+                    <div class="lg:col-span-1 lg:row-span-2" id="ticketSelector" :x-show="true">
+                        <div class="mx-auto p-0 text-center lg:col-span-2">
+                            <div class="mt-3 lg:mt-0 w-full" id="datepickerSingle">
+                                <div class="input-with-svg mx-8 sm:mx-10 boletos">
+                                    <button
+                                        class="w-full h-14 lg:h-12  py-1 lg:py-0 px-7 lg:px-14 text-lg lg:text-base bg-gray-100 border rounded-lg focus:shadow-outline pl-14 lg:pl-20"
+                                        id="openTicketModal" :x-show="true">
+                                        Selecciona tus boletos
+                                        <div id="totalMessage" id="openTicketModal" class="text-center mt-0 mr-48">
+                                        </div>
+                                    </button>
+                                    <input type="text" name="adultos" id="adultInput" class="hidden form-control">
+                                    <input type="text" name="menores" id="childInput" class="hidden form-control">
+                                    <input type="text" name="senectud" id="inapamInput" class="hidden form-control">
+                                    <input type="text" name="estudiantes" id="professorInput"
+                                        class="hidden form-control">
+                                    <input type="text" name="profesores" id="studentInput" class="hidden form-control">
+                                    <img class="bus-logo ml-3" src="icono_pasajeros.svg" alt="Autobús"
+                                        style="width: 40px; height: 40px; margin-left:20px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fixed bottom-0 left-0 right-0 bg-black bg-opacity-50 h-screen flex justify-center items-center z-50 rounded-lg"
+                        id="ticketModal" style="display: none;">
+                        <div class="bg-white p-4 max-w-2xl rounded-lg">
+
+                            <!-- Adulto -->
+                            <div class="grid grid-cols-2 gap-4 mb-4 py-2 mt-3">
+                                <div class="flex items-center">
+                                    <span class="pl-5 sm:pl-24 font-black text-[#003368]">Adulto <p class="font-normal">
+                                            +12
+                                            años</p>
+                                    </span>
+                                </div>
+                                <div class="flex items-center">
+                                    <button type="button"
+                                        class="ml-10 px-4 py-3 sm:ml-20 text-xs bg-[#DCDCDC] text-white rounded-full"
+                                        data-type="decrement-adult">-</button>
+                                    <span class="mx-2 text-base font-semibold" id="adultCount">0</span>
+                                    <button type="button" class="px-4 py-3 text-xs bg-[#0D8BFF] text-white rounded-full"
+                                        data-type="increment-adult">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Niño -->
+                            <div class="grid grid-cols-2 gap-4 mb-4 py-2">
+                                <div class="flex items-center">
+                                    <span class="pl-5 sm:pl-24 font-black text-[#003368]">Niño <p class="font-normal">De
+                                            6 a
+                                            11 años
+                                        </p></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <button type="button"
+                                        class="ml-10 px-4 py-3 sm:ml-20 text-xs bg-[#DCDCDC] text-white rounded-full"
+                                        data-type="decrement-child">-</button>
+                                    <span class="mx-2 text-base font-semibold" id="childCount">0</span>
+                                    <button type="button" class="px-4 py-3 text-xs bg-[#0D8BFF] text-white rounded-full"
+                                        data-type="increment-child" id="contadorNino">+</button>
+                                </div>
+                            </div>
+
+                            <!-- INAPAM -->
+                            <div class="grid grid-cols-2 gap-4 mb-4 py-2">
+                                <div class="flex items-center">
+                                    <span class="pl-5 sm:pl-24 font-black text-[#003368]">INAPAM <p class="font-normal">
+                                            Presentar</p>
+                                        <p class="font-normal"> documentación oficial</p>
+                                    </span>
+                                </div>
+                                <div class="flex items-center">
+                                    <button type="button"
+                                        class="ml-10 px-4 py-3 sm:ml-20 text-xs bg-[#DCDCDC] text-white rounded-full"
+                                        data-type="decrement-inapam">-</button>
+                                    <span class="mx-2 text-base font-semibold" id="inapamCount">0</span>
+                                    <button type="button" class="px-4 py-3 text-xs bg-[#0D8BFF] text-white rounded-full"
+                                        data-type="increment-inapam">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Profesor -->
+                            <div class="grid grid-cols-2 gap-4 mb-4 py-2">
+                                <div class="flex items-center">
+                                    <span class="pl-5 sm:pl-24 font-black text-[#003368]">Profesor <p
+                                            class="font-normal">
+                                            Presentar
+                                        </p>
+                                        <p class="font-normal"> credencial vigente </p>
+                                    </span>
+                                </div>
+                                <div class="flex items-center">
+                                    <button type="button"
+                                        class="ml-10 px-4 py-3 sm:ml-20 text-xs bg-[#DCDCDC] text-white rounded-full"
+                                        data-type="decrement-professor">-</button>
+                                    <span class="mx-2 text-base font-semibold" id="professorCount">0</span>
+                                    <button type="button" class="px-4 py-3 text-xs bg-[#0D8BFF] text-white rounded-full"
+                                        data-type="increment-professor">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Estudiante -->
+                            <div class="grid grid-cols-2 gap-4 mb-4 py-2">
+                                <div class="flex items-center">
+                                    <span class="pl-5 sm:pl-24 font-black text-[#003368]">Estudiante <p
+                                            class="font-normal">
+                                            Presentar
+                                            credencial vigente </p></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <button type="button"
+                                        class="ml-10 px-4 py-3 sm:ml-20 text-xs bg-[#DCDCDC] text-white rounded-full"
+                                        data-type="decrement-student">-</button>
+                                    <span class="mx-2 text-base font-semibold" id="studentCount">0</span>
+                                    <button type="button" class="px-4 py-3 text-xs bg-[#0D8BFF] text-white rounded-full"
+                                        data-type="increment-student">+</button>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <button type="button"
+                                    class="bg-[#C82333] text-white px-4 mx-auto py-2 rounded-lg mt-4 sm:px-10 sm:py-3"
+                                    id="closeTicketModal" onclick="habilitarBotonBuscarViaje()">
+                                    ACEPTAR
+                                </button>
+                            </div>
+                            <!-- <input type="hidden" id="tipoViaje" name="tipoViaje" value="ida">-->
+                            <!--<input type="hidden" name="consecutivo" id="consecutivoInput" value="">-->
+                            <!-- Otros campos ocultos para otros parámetros -->
+
+                        </div>
+                    </div>
+                    <div class="mx-auto p-0">
+
+                        <div class="mt-3 w-full lg:hidden">
+                            <div class="input-with-svg mx-8 sm:mx-10">
+                                <button
+                                    class="w-full bg-[#C82333] text-white font-bold text-lg rounded-lg py-3 px-7 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    id="buscarViajeBtn1" disabled type="submit">
+                                    BUSCAR VIAJE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <!-- FORMAS DE PAGO -->
+        <div class="formas-de-pago w-full h-auto bg-[#1D93D2] pt-3 px-8">
+            <!-- Formas de Pago Electrónico (Móvil) -->
+            <div class="flex justify-center items-center space-x-6 lg:hidden">
+                <div class="visa mb-4">
+                    <img src="Visa-01.svg" alt="visa" class="bg-white w-12 h-9 border rounded-lg px-2 py-2">
+                </div>
+                <div class="mastercard mb-4">
+                    <img src="master-card-02.svg" alt="mastercard" class="bg-white w-14 h-9 border rounded-lg">
+                </div>
+                <div class="citibanamex mb-4">
+                    <img src="Banamex-03.svg" alt="citibanamex" class="bg-white w-20 h-9 border rounded-lg">
+                </div>
+                <div class="coppel mb-4">
+                    <img src="Coppel-04.svg" alt="coppel" class="bg-white w-20 h-9 border rounded-lg">
+                </div>
+            </div>
+
+            <!-- Pago en efectivo (Móvil) -->
+            <div class="flex justify-center items-center lg:hidden">
+                <div class="efectivo mx-auto text-center">
+                    <img src="Paga_tus_boletos_en_efectivo.svg" alt="efectivo"
+                        class="bg-white w-full h-12 border rounded-lg">
+                </div>
+            </div>
+
+            <!-- Formas de Pago Electrónico (Escritorio) -->
+            <div class="hidden lg:flex justify-center flex-wrap max-w-screen-2xl px-32 xl:px-52 2xl:px-[370px] py-2"
+                id="escritorio">
+                <div class="hidden sm:flex justify-center items-center space-x-4">
+                    <div class="visa">
+                        <img src="Visa-01.svg" alt="visa" class="bg-white w-20 h-9 border rounded-lg px-2 py-2">
+                    </div>
+                    <div class="mastercard">
+                        <img src="master-card-02.svg" alt="mastercard" class="bg-white w-20 h-9 border rounded-lg">
+                    </div>
+                    <div class="citibanamex">
+                        <img src="Banamex-03.svg" alt="citibanamex" class="bg-white w-24 h-9 border rounded-lg">
+                    </div>
+                    <div class="coppel">
+                        <img src="Coppel-04.svg" alt="coppel" class="bg-white w-24 h-9 border rounded-lg">
+                    </div>
+                    <div class="efectivo mx-auto text-center">
+                        <img src="Paga_tus_boletos_en_efectivo.svg" alt="efectivo"
+                            class="bg-white w-11/12 h-9 border rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SLIDERS -->
+        <div class="flex justify-center items-center py-3 pl-8 pr-8 bg-[#1D93D2]">
+            <div
+                class="w-full sm:w-9/12 md:w-6/12 lg:w-7/12 xl:w-1/2 2xl:w-2/5 rounded-lg overflow-hidden bg-[#1D93D2]">
+                <div class="slider-container">
+                    <div class="slider slider-1">
+                        <img src="Banner_App(1).webp" alt="Banner Aplicacion"
+                            class="max-w-screen-md h-auto md:w-1/2 rounded-lg" width="30px" height="30px">
+                        <img src="Banner_servicios_DD(1).webp" alt="Servicios" loading="lazy"
+                            class="max-w-screen-md h-auto md:w-1/2 rounded-lg" width="30px" height="30px">
+                        <img src="seguridad(1).webp" alt="Aviso de seguridad" loading="lazy"
+                            class="max-w-screen-md h-auto md:w-1/2 rounded-lg" width="30px" height="30px">
+                        <img src="Banner_ODM_pacifico_(1).webp" alt="Banner pacifico" loading="lazy"
+                            class="max-w-screen-md h-auto md:w-1/2 rounded-lg" width="30px" height="30px">
+                        <img src="Banner_Viaja_DD_(1).webp" alt="Euro 6" loading="lazy"
+                            class="max-w-screen-md h-auto md:w-1/2 rounded-lg" width="30px" height="30px">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-white text-xl lg:text-2xl xl:text-3xl bg-[#1D93D2] text-center font-bold pt-5 xl:pb-5">VIAJES
+            MÁS
+            SOLICITADOS</h1>
+
+        <div class="flex justify-center items-center py-3 pl-8 pr-8 bg-[#1D93D2]">
+            <div class="w-full sm:w-9/12 md:w-3/4 lg:w-10/12 xl:w-9/12 rounded-lg overflow-hidden bg-[#1D93D2]">
+                <div class="slider-container lg:hidden">
+                    <div class="slider-2">
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#C82333] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            México Central Norte.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Altamira, Tamps.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="cdmx_central_norte.webp" class="h-24 w-1/2 flex-1"
+                                        alt="CDMX Central Norte" />
+                                    <img src="Altamira_Tam.webp" class="h-24 w-1/2 flex-1" alt="Altamira Tamaulipas" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio por internet</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$1,839.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio viaje redondo</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$3,492.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#003368] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            Cd. Obregón, Sin.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Tijuana, B.C
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="Palacio_CD_OBREGON.webp" class="h-24 w-1/2 flex-1 object-cover"
+                                        alt="Palacio Cd. Obregon" />
+                                    <img src="Tijuana.webp" class="h-24 w-1/2 flex-1 object-cover" alt="Tijuana" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio por internet</p>
+                                        <p class="text-red-600 font-bold text-xl">$1,564.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio viaje redondo</p>
+                                        <p class="text-red-600 font-bold text-xl">$2,970.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#C82333] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            Culiacán, Sin.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Tijuana, B.C.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="Catedral_culiacan.webp" class="h-24 w-1/2 flex-1"
+                                        alt="Catedral Culiacán" />
+                                    <img src="Tijuana.webp" class="h-24 w-1/2 flex-1" alt="Tijuana" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio por internet</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$1,839.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Precio viaje redondo</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$3,492.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-xl font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-xl">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Muestra el bloque de cards en pantallas grandes (lg y superior) -->
+                <div class="hidden lg:flex lg:space-x-4">
+                    <!-- Imagen 1 -->
+                    <div class="flex xl:flex-1 w-auto">
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-64 2xl:w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#C82333] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            México Central Norte.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Altamira, Tamps.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="cdmx_central_norte.webp" class="h-24 w-1/2 flex-1"
+                                        alt="CDMX Central Norte" />
+                                    <img src="Altamira_Tam.webp" class="h-24 w-1/2 flex-1" alt="Altamira Tamaulipas" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio por internet</p>
+                                        <p class="text-[#C82333] font-bold text-base">$1,839.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio viaje redondo</p>
+                                        <p class="text-[#C82333] font-bold text-base">$3,492.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Imagen 2 -->
+                    <div class="flex xl:flex-1 w-auto">
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-64 2xl:w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#003368] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            Cd. Obregón, Sin.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Tijuana, B.C
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="Palacio_CD_OBREGON.webp" class="h-24 w-1/2 flex-1"
+                                        alt="Palacio Cd. Obregon" />
+                                    <img src="Tijuana.webp" class="h-24 w-1/2 flex-1" alt="Tijuana" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio por internet</p>
+                                        <p class="text-red-600 font-bold text-base">$1,564.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio viaje redondo</p>
+                                        <p class="text-red-600 font-bold text-base">$2,970.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Imagen 3 -->
+                    <div class="flex  w-auto">
+                        <div class="relative flex flex-col justify-center overflow-hidden bg-[#1D93D2]">
+                            <div
+                                class="relative flex h-auto w-64 2xl:w-72 flex-col bg-white sm:mx-auto sm:max-w-2xl mx-auto my-auto rounded-lg">
+                                <div class="text-center w-full flex items-center relative">
+                                    <div class="bg-[#C82333] py-1 relative w-full">
+                                        <!-- Luna amarilla -->
+                                        <div
+                                            class="absolute bottom-0 left-0 transform h-14 w-14 bg-[#FFE600] rounded-full">
+                                            <div
+                                                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#003368] font-bold uppercase text-base -rotate-45">
+                                                VIAJA</div>
+                                        </div>
+
+                                        <p class="text-white font-bold pl-7">
+                                            Culiacán, Sin.
+                                            <br>
+                                            <span class="text-yellow-400">a</span>
+                                            Tijuana, B.C.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex-1 mx-auto flex max-w-2xl flex-row">
+                                    <img src="Catedral_culiacan.webp" class="h-24 w-1/2 flex-1"
+                                        alt="Catedral Culiacán" />
+                                    <img src="Tijuana.webp" class="h-24 w-1/2 flex-1" alt="Tijuana" />
+                                </div>
+                                <div
+                                    class="flex-2 mx-auto px-3 pt-3 flex w-full max-w-md flex-row bg-white justify-center">
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio por internet</p>
+                                        <p class="text-[#C82333] font-bold text-base">$1,839.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$10%</p>
+                                    </div>
+                                    <hr class="my-3 h-auto w-1 bg-[#003368]" />
+
+                                    <div class="text-center">
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Precio viaje redondo</p>
+                                        <p class="text-[#C82333] font-bold text-base">$3,492.00<span
+                                                class="text-xs">MX</span></p>
+                                        <p class="flex-1 text-[#003368] text-base font-bold">Ahorras</p>
+                                        <p class="text-[#C82333] font-bold text-base">$15%</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        class="bg-transparent text-2xl px-16 py-1 my-3 rounded-lg border-blue-900 border-2 text-blue-900 font-normal">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center py-3 pl-8 pr-8 bg-[#1D93D2]">
+            <div class="w-full sm:w-9/12 md:w-3/4 lg:w-10/12 xl:w-9/12 rounded-lg overflow-hidden bg-[#1D93D2]">
+                <div class="slider-container lg:hidden">
+                    <div class="slider slider-3">
+                        <div class="slide">
+                            <img src="noreste.webp" alt="Banner Noreste"
+                                class="w-36 h-auto rounded-lg sm:h-auto sm:w-auto" width="30px" height="30px">
+
+                        </div>
+                        <div class="slide">
+                            <img src="omex.webp" alt="Banner OMEX" class="w-36 h-auto rounded-lg" width="30px"
+                                height="30px">
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:flex lg:space-x-4 w-full">
+                    <!-- Imagen 1 -->
+                    <div class="w-full">
+                        <img src="noreste.webp" alt="Banner Noreste" class="w-full h-auto rounded-lg" width="0px"
+                            height="0px">
+                    </div>
+                    <!-- Imagen 2 -->
+                    <div class="w-full">
+                        <img src="omex.webp" alt="Banner OMEX" class="w-full h-auto rounded-lg" width="0px"
+                            height="0px">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center items-center py-3 pl-8 pr-8 bg-[#1D93D2]">
+            <div class="w-full sm:w-9/12 md:w-3/4 lg:w-10/12 xl:w-9/12 rounded-lg overflow-hidden bg-[#1D93D2]">
+                <div class="slider-container">
+                    <div class="slider slider-4">
+                        <div class="slide">
+                            <img src="omnibus_mexico_destinos(1).webp" alt="ODM Destinos"
+                                class="max-w-screen-xl h-full rounded-lg img-slider" width="301px" height="102px">
+                            <div class="slide-text text-sm">
+                                <p
+                                    class="text-white font-semibold text-xs text-center sm:text-base lg:text-lg xl:text-xl">
+                                    TURISMO
+                                    /
+                                    EXPERIENCIAS</p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">¿Qué
+                                    actividades
+                                    puedes
+                                    realizar cuando
+                                    llegas a un nuevo lugar?</p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">Te
+                                    contamos los
+                                    imperdibles en
+                                    cada uno de
+                                    nuestros #DestinosODM</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="omnibus_mexico_gastronomia(1).webp" alt="ODM Gastronomia"
+                                class="max-w-screen-xl h-full rounded-lg img-slider" width="301px" height="102px">
+                            <div class="slide-text text-sm">
+                                <p
+                                    class=" text-white font-semibold text-xs text-center sm:text-base lg:text-lg xl:text-xl">
+                                    GASTRONOMÍA</p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">Porque
+                                    uno no conoce
+                                    un lugar
+                                    sin probar
+                                    <br> su comida típica. Traemos para ti los <br> platillos de cada uno de nuestros
+                                    destinos <br> para que tu viaje sea más placentero.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="eventos-odm(1).webp" alt="ODM Eventos"
+                                class="max-w-screen-xl h-full rounded-lg img-slider" width="301px" height="102px">
+                            <div
+                                class="slide-text text-sm text-center sm:text-base lg:text-lg xl:text-xl font-semibold">
+                                EVENTOS
+                                CULTURALES
+                                <p class=" text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">¿Vas a
+                                    viajar sin
+                                    un plan de
+                                    actividades?
+                                </p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl"> Omnibus
+                                    de
+                                    México
+                                    te informa
+                                    cuáles son
+                                </p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">los
+                                    eventos
+                                    culturales más
+                                    representativos </p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl"> de cada
+                                    región y
+                                    que solo
+                                    pasan una vez al
+                                </p>
+                                <p class="text-white font-semibold text-xs sm:text-base lg:text-lg xl:text-xl">
+                                    año para que no
+                                    te los pierdas.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .img-slider {
+            max-width: 1458px;
+        }
+    </style>
+    <!-- FOOTER -->
+    <section class="bg-[#003368]">
+        <div class="max-w-screen-xl px-4 py-10 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="flex flex-wrap justify-center -mx-5 -my-2">
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/quienes-somos2"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        ¿Quiénes somos?
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/preguntas-frecuentes"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Preguntas frecuentes
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="http://venta.odm.com.mx/netScripts/request.aspx?APPNAME=Navegante&PRGNAME=AccesoEx&ARGUMENTS=-AAG&_gl=1*z7x1y0*_ga*NjAyODM2MzE2LjE2NzI0MjgyOTU.*_ga_6MKKJY80T1*MTY3OTY3MDk4NC4xMDQuMS4xNjc5NjcyNjE0LjQ5LjAuMA.."
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Agencias
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://odm.com.mx/contactanos"
+                        class="text-base leading-6 text-white hover:text-neutral-600">
+                        Contáctanos
+                    </a>
+                </div>
+            </nav>
+            <img src="logoblanco.webp" alt="Logo" class="w-60 h-20 mx-auto" />
+            <div class="flex justify-center mt-5 space-x-6">
+                <a href="https://www.facebook.com/OmnibusdeMexicoOficial/?fref=ts"
+                    class="text-white hover:text-neutral-600">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/omnibus_oficial" class="text-white hover:text-gray-600">
+                    <span class="sr-only">Twitter</span>
+                    <img src="twitterxlogo.webp" class="w-6 h-6" alt="">
+                </a>
+                <a href="https://www.instagram.com/omnibus_oficial/" class="text-white hover:text-gray-600">
+                    <span class="sr-only">Instagram</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCyQ_-uZqptGN2M45DNOl7CQ"
+                    class="text-white hover:text-gray-600">
+                    <span class="sr-only">YouTube</span>
+                    <svg aria-hidden="true" fill="currentColor" class="bi bi-youtube w-6 h-6" viewBox="0 0 16 16">
+                        <path
+                            d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <p class="mt-8 text-base leading-6 text-center text-white hover:text-neutral-600">
+                <a href="https://odm.com.mx/aviso-privacidad">Aviso de privacidad | Políticas de viaje</a>
+            </p>
+            <p class="mt-8 text-base leading-6 text-center text-white">
+                © 2023 Ómnibus de México. Todos los derechos reservados.
+            </p>
+        </div>
+    </section>
+
+
+    <script src="jQuery360.js"></script>
+    <script src="select2min.js"></script>
+    <script defer src="alpine.js"></script>
+    <!-- SCRIPT DEL MENU DE HAMBURGUESA -->
+    <script src="index.js"></script>
+
+    <!-- SCRIPT DEL CALENDARIO -->
+    <script src="flatpickr.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Función para verificar la selección
+            function verificarSeleccion() {
+                const childCount = parseInt(document.getElementById('childCount').textContent);
+                const totalBoletos = parseInt(document.getElementById('adultCount').textContent) +
+                    parseInt(document.getElementById('inapamCount').textContent) +
+                    parseInt(document.getElementById('professorCount').textContent) +
+                    parseInt(document.getElementById('studentCount').textContent);
+
+                return totalBoletos > 0 || childCount === 0;
+            }
+
+            // Añade este evento al botón de cierre del modal
+            document.getElementById('contadorNino').addEventListener('click', function () {
+                if (!verificarSeleccion()) {
+                    alert('Un menor no puede viajar solo. Por favor, elija un boleto de acompañante mayor de edad.');
+                    return false; // Detiene la ejecución de la función si se muestra la alerta.
+                }
+
+                // Resto del código para cerrar el modal y cualquier otra acción que desees realizar.
+                habilitarBotonBuscarViaje();
+            });
+
+        });
+    </script>
+
+    <!-- SCRIPT DE SELECCION DE ORIGEN -->
+
+    <script>
+
+        $(document).ready(function () {
+            $("#origenSelect").select2();
+            var e = !1;
+            $("#origenSelect").on("select2:select", function (d) {
+                if (!e) {
+                    e = !0, setTimeout(function () {
+                        e = !1
+                    }, 2e3);
+                    const n = d.params.data.id;
+                    $("#origenSelect").val(n).trigger("change")
+                }
+            }), $("#origenSelect").on("change", function () {
+                var e = $(this).val();
+                $.getJSON("destinos71/" + e + ".json", function (e, d) {
+                    var n = e.filter((e, d, n) => d === n.findIndex(d => d.id === e.id)),
+                        i = $("#destinoSelect");
+                    i.empty(), i.append($("<option>").val("¿A dónde viajas?").text("¿A dónde viajas?")), $.each(n, function (e, d) {
+                        var a = n[e].id,
+                            t = n[e].value;
+                        i.append($("<option>").val(a).text(t))
+                    }), i.trigger("change.select2")
+                })
+            }), $("#destinoSelect").select2(), $("#origenSelect, #destinoSelect").on("change", function () {
+                var e = $("#origenSelect").val(),
+                    d = $("#destinoSelect").val();
+                e && d ? $("#redondo").prop("checked") ? ($("#datepickerRange").removeClass("hidden"), $("#datepickerSingle").addClass("hidden")) : $("#sencillo").prop("checked") && ($("#datepickerSingle").removeClass("hidden"), $("#datepickerRange").addClass("hidden")) : ($("#datepickerRange").addClass("hidden"), $("#datepickerSingle").addClass("hidden"))
+            })
+        });
+        $('html').on('change', 'select[name="origenCode"]', function (event) {
+            let origenElegido = $(this).val();
+
+            let hijoTxt = $('select[name="origenCode"] option:selected').text();
+            $('input[name="origenText"]').attr('value', hijoTxt);
+
+            console.log("texto_ruta", hijoTxt);
+            console.log("colocar", origenElegido);
+            destinosLocales(origenElegido);
+        });
+        function destinosLocales(dest) {
+
+            $.getJSON('destinos71/' + dest + '.json?3', function (jsonRaw, textStatus) {
+
+                $('#destinoSelect').html('<option selected="selected" disabled>¿A Dónde Viajas?</option>');
+
+                //filtra duplicados
+                var json = jsonRaw.filter((data, index, j) => index === j.findIndex((t) => (t.id === data.id)))
+
+                $.each(json, function (i, val) {
+
+
+                    var id = json[i].id;
+                    var valor = json[i].value;
+                    $('#destinoSelect').append('<option value=' + id + '>' + valor + '</option>');
+
+
+                });
+
+            });
+        }
+
+    </script>
+    <!-- ENVIO DE DATOS DEPENDIENDO EL TIPO DE VIAJE-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $("#formulario").on("submit", function (event) {
+                event.preventDefault();
+
+                // Obtén el tipo de viaje seleccionado
+                const tipoViaje = $('input[type="radio"][name="opcion"]:checked').attr('id');
+
+                // Variables para almacenar las fechas
+                let fechSalida;
+                let fechRegreso;
+                let boletosProfesores;
+                let boletosEstudiantes;
+
+                if (tipoViaje === 'redondo') {
+                    // Si es viaje redondo, recopila las fechas del datepickerRange
+                    fechSalida = $("#datepickerRange input[name='fechSalida']").val();
+                    fechRegreso = $("#datepickerRange input[name='fechRegreso']").val();
+                    boletosProfesores = $("#datepickerRange input[name='profesores']").val();
+                    boletosEstudiantes = $("#datepickerRange input[name='estudiantes']").val();
+
+                    // Remueve los atributos "name" del datepickerSingle
+                    $("#datepickerSingle input[name='fechSalida']").removeAttr('name');
+                    $("#datepickerSingle input[name='fechRegreso']").removeAttr('name');
+                    $("#datepickerSingle input[name='profesores']").removeAttr('name');
+                    $("#datepickerSingle input[name='estudiantes']").removeAttr('name');
+                } else {
+                    // Si es viaje sencillo, recopila las fechas del datepickerSingle
+                    fechSalida = $("#datepickerSingle input[name='fechSalida']").val();
+                    fechRegreso = "_"; // O algún valor que indique que no se seleccionó para fechRegreso
+                    boletosProfesores = $("#datepickerSingle input[name='profesores']").val();
+                    boletosEstudiantes = $("#datepickerSingle input[name='estudiantes']").val();
+
+                    // Remueve los atributos "name" del datepickerRange
+                    $("#datepickerRange input[name='fechSalida']").removeAttr('name');
+                    $("#datepickerRange input[name='fechRegreso']").removeAttr('name');
+                    $("#datepickerRange input[name='profesores']").removeAttr('name');
+                    $("#datepickerRange input[name='estudiantes']").removeAttr('name');
+                }
+
+                localStorage.setItem('tipoViaje', tipoViaje);
+                localStorage.setItem('fechSalida', fechSalida);
+                localStorage.setItem('fechRegreso', fechRegreso);
+
+                // Redirige a paso1.html
+                window.location.href = 'paso1.html';
+                // Verifica y elimina campos vacíos antes de enviar
+                const datosAEnviar = {
+                    tipoViaje: tipoViaje,
+                    fechSalida: fechSalida,
+                    fechRegreso: fechRegreso
+                };
+
+                //Datos en consola
+                console.log(datosAEnviar);
+
+                // enviar el formulario
+                this.submit();
+            });
+            // Agrega un evento al botón "FECHA ABIERTA"
+            document.getElementById('fechaAbiertaButton').addEventListener('click', function () {
+                // Obtén el valor actual del botón
+                const fechaAbierta = $('input[name="fechRegreso"]').val();
+
+                // Si el valor actual es "FECHA ABIERTA", cambia el atributo name
+                if (fechaAbierta === 'FECHA ABIERTA') {
+                    // Cambia el atributo name a lo que necesitas
+                    $('input[name="fechRegreso"]').attr('name', 'fechaAbierta');
+                }
+            });
+            if (fechRegreso === 'FECHA ABIERTA') {
+                // Ajusta los valores de boletos de profesores y estudiantes a cero
+                $("input[name='profesores']").val(0);
+                $("input[name='estudiantes']").val(0);
+                boletosProfesores = 0;
+                boletosEstudiantes = 0;
+            }
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $('.basico').fadeIn();
+        let orig = false;
+        let peticion = 'XXX';
+
+        $('html').on('change', 'select[name="origenCode"]', function (event) {
+            let eleccion = $(this).val();
+            orig = (eleccion == peticion) ? true : false;
+            descuentosControl(eleccion);
+
+        });
+
+        $('html').on('change', 'select[name="destinoCode"]', function (event) {
+            let eleccion = $(this).val();
+            descuentosControl(eleccion);
+
+            let hijoTxt2 = $('select[name="destinoCode"] option:selected').text();
+            console.log({
+                hijoTxt2
+            });
+            $('input[name="destinoText"]').attr('value', hijoTxt2);
+
+
+        });
+
+        function descuentosControl(NOM) {
+            let visibles = (NOM == peticion) ? '.basico,.basico2' : '.basico';
+            $(visibles).fadeIn();
+            if (!orig) {
+                if (NOM !== peticion) {
+                    //$('.basico2').fadeOut();
+                }
+            }
+        }
+
+        $('#tarjprueba button').click(function (event) {
+            //f();
+        });
+    </script>
+    <script type="text/javascript">
+        function fichas(data) {
+
+            let nomorig = $(data).attr('nomorig');
+            let textorig = $(data).attr('textorig');
+            let nomdest = $(data).attr('nomdest');
+            let textdest = $(data).attr('textdest');
+
+            $('#select2-origenSelect-container').text(textorig);
+            $('input[name="origenText"]').val(textorig);
+
+
+            $('#select2-destinoSelect-container').text(textdest);
+            $('input[name="destinoText"]').val(textdest);
+            $('html').on('change', 'select[name="destinoCode"]', function (event) {
+                let eleccion = $(this).val();
+                descuentosControl(eleccion);
+
+                let hijoTxt2 = $('select[name="destinoCode"] option:selected').text();
+                console.log({
+                    hijoTxt2
+                });
+                $('input[name="destinoText"]').attr('value', hijoTxt2);
+
+
+            });
+
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+
+            $('#origenSelect').html('<option value="' + nomorig + '">' + textorig + '</option>');
+            $('#destinoSelect').html('<option value="' + nomdest + '">' + textdest + '</option>');
+
+        }
+    </script>
+    <!-- index.html -->
+    <script>
+        function guardarDatos() {
+            var origenCode = document.getElementById('origenSelect').value;
+            var destinoCode = document.getElementById('destinoSelect').value;
+            var fecha = document.getElementById('datepickerSingle').value;
+            var adultos = document.getElementById('adultInput').value;
+            var menores = document.getElementById('childInput').value;
+            var senectud = document.getElementById('inapamInput').value;
+            var profesor = document.getElementById('professorInput').value;
+            var estudiante = document.getElementById('studentInput').value;
+            // O guardar datos en almacenamiento local
+            localStorage.setItem('origenCode', origenCode);
+            localStorage.setItem('destinoCode', destinoCode);
+            localStorage.setItem('fechSalida', fechSalida);
+            localStorage.setItem('adultos', adultos);
+            localStorage.setItem('menores', menores);
+            localStorage.setItem('senectud', senectud);
+            localStorage.setItem('profesor', profesor);
+            localStorage.setItem('estudiante', estudiante);
+        }
+    </script>
+
+    <!-- SCRIPT DEL CAROUSEL -->
+    <script type="text/javascript" src="slick-carousel.js"></script>
+</body>
+
+</html>

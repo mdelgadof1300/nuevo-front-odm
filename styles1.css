@@ -1,0 +1,65 @@
+.slide {
+  position: relative;
+  /* Asegura que el contenedor de la slide sea relativo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-container {
+  width: 100%;
+  padding: 5px;
+}
+
+.slider img {
+  width: 100%;
+}
+
+.slide-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  /* Inicialmente, el texto estará oculto */
+  transition: opacity 0.3s ease-in-out;
+  align-items: center;
+}
+
+.slide-text1 p,
+.slide-text2 p {
+  white-space: nowrap;
+}
+
+.text-left {
+  align-items: flex-end;
+}
+
+@font-face {
+  font-family: 'Slick';
+  src: url('fonts/slick.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+[x-cloak] {
+  display: none;
+}
+@media (min-width: 1024px) {
+  #navbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  #navbar > * {
+    flex-shrink: 0;
+  }
+}

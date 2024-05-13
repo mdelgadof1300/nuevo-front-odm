@@ -1,0 +1,25 @@
+{
+  "name": "odm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "postcss styles.css -o style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mikebullet-02/odm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mikebullet-02/odm/issues"
+  },
+  "homepage": "https://github.com/Mikebullet-02/odm#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
+  }
+}
